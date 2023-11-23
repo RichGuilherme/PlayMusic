@@ -22,7 +22,7 @@ export const ProgressBar = styled.div`
    height: 5px;
    border-radius: 50px;
 
-   background-color: #F3F4F6;
+   background-color: #ffffff4d;
    
    cursor: pointer;
 
@@ -32,9 +32,14 @@ export const ProgressBar = styled.div`
 
       border-radius: 100px;
     
-      background-color: ${props => props.theme.colors.colorPrimary};
-
+      background-color: #fff;
+     
     }
+    
+    &:hover div {
+        background-color: ${props => props.theme.colors.colorPrimary}
+    }
+
     &:hover div::before{
        content: "";
        position: absolute;

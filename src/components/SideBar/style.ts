@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SSideBar = styled.aside`
-  width: 17%;
+  width: 100%;
   height: calc(100vh - 118px);
   
   border-right: 1px solid ${props => props.theme.colors.colorPrimary};

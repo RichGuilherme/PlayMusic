@@ -10,13 +10,13 @@ export const TimeMusic = ({ audioPlayRef }: TimeMusicProps) => {
     const [startTime, setStartTime] = useState<string>("0:00")
     const [durationAudio, setDurationAudio] = useState<string>("0:00")
 
-
     const progressBarRef = useRef<HTMLDivElement>(null)
 
+    // Com um clique na barra de progresso da música, alterar o progresso da música.
     const handleProgressBarClick = (event: React.MouseEvent<HTMLDivElement>) => {
         if (progressBarRef.current) {
           const clickedPosition = event.nativeEvent.offsetX
-
+        
           const progressBarWidth = progressBarRef.current.clientWidth
           const clickedPercentage = (clickedPosition / progressBarWidth) * 100
     
@@ -64,8 +64,8 @@ export const TimeMusic = ({ audioPlayRef }: TimeMusicProps) => {
 
                 <ProgressBar
                  ref={progressBarRef}
-                 onClick={handleProgressBarClick}
-                >
+                 onClick={handleProgressBarClick}>
+                    
                     <div style={{ width: `${progress + "%"}` }} ></div>
                 </ProgressBar>
 

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
     *{
@@ -28,3 +28,18 @@ export const ColorThemer = {
         colorPrimary: "#ADFF00"
     }
 }
+
+export const ViewApp = styled.div`
+   width: 100%;
+   display: grid;
+   grid-template-columns: auto 1fr;
+   grid-template-rows: 1fr auto;
+   grid-column-gap: 0px;
+   grid-row-gap: 0px;
+
+   div:nth-child(1) { grid-area: 1 / 1 / 3 / 2; }
+   div:nth-child(2) { grid-area: 1 / 2 / 2 / 3; }
+   div:nth-child(3) { grid-area: 2 / 1 / 3 / 3; }
+
+   overflow: hidden;
+`

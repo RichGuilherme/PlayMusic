@@ -10,17 +10,30 @@ import musica from "../../../assets/a-ha - Take On Me (Official Video) [Remaster
 import { TimeMusic } from "./timeMusic"
 import { ContainerPlay, ControlButtons } from "./style"
 
+type PlayProps = {
+    volumeProps: number
+    muted: boolean
+}
 
-export const Play = () => {
-    const audioPlay = useRef<HTMLAudioElement>(null)
+export const Play = ({volumeProps, muted}: PlayProps) => {
+    const audioPlayRef = useRef<HTMLAudioElement>(null)
     const [playing, setPlaying] = useState(false)
+    const [loop, setLoop] = useState(false)
+    
 
+    useEffect(() => {
+        if (audioPlayRef.current) {
+            
+          audioPlayRef.current.volume = volumeProps / 100  
+        }
+      }, [audioPlayRef, volumeProps]);
+        
 
     useEffect(() => {
         if (playing) {
-            audioPlay.current?.play()
+            audioPlayRef.current?.play()
         } else {
-            audioPlay.current?.pause()
+            audioPlayRef.current?.pause()
         }
     }, [playing])
 
@@ -39,7 +52,7 @@ export const Play = () => {
                 <button onClick={() => setPlaying(!playing)}>
                     {playing ?
                         <HiPauseCircle
-                            
+
                             size={41} />
                         :
                         <MdPlayCircleFilled
@@ -51,13 +64,24 @@ export const Play = () => {
                     <FiChevronRight size={23} />
                 </button>
 
-                <button>
+                <button
+                    onClick={() => setLoop(!loop)}
+                    style={{ color: `${loop ? "#ffff" : ""}` }}
+                >
+
                     <LuRefreshCcw size={23} />
                 </button>
             </ControlButtons>
 
-            <TimeMusic audioPlayRef={audioPlay} />
-            <audio src={musica} ref={audioPlay}></audio>
+            <TimeMusic audioPlayRef={audioPlayRef} />
+
+
+            <audio
+                src={musica}
+                ref={audioPlayRef}
+                loop={loop}
+                muted={muted}>
+            </audio>
         </ContainerPlay>
 
     )
