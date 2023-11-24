@@ -4,7 +4,7 @@ import imageProfile from "../../assets/imageProfile.jpeg";
 import { ContainerMenus, Profile, SSideBar } from "./style";
 
 import { BsGridFill, BsMoon, } from "react-icons/bs";
-import { PiPlaylist } from "react-icons/pi";
+import { FaHeart } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 import { MdLogout } from "react-icons/md";
 import { AiOutlineSetting } from "react-icons/ai";
@@ -12,7 +12,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 
 
 export const SideBar = () => {
-    const [isRegisted, setIsRegisted] = useState(false)
+    const [isRegisted, setIsRegisted] = useState(true)
 
     return (
         <SSideBar>
@@ -26,7 +26,7 @@ export const SideBar = () => {
                 ) :
                     (
                         <>
-                            <img 
+                            <img
                                 alt="profile" />
                             <h1>
                                 Login / Sign up <MdKeyboardArrowRight size={29} />
@@ -37,14 +37,10 @@ export const SideBar = () => {
 
             <ContainerMenus>
                 <div>
-                    <div>
-                        <BsGridFill />
-                        <p>Your library</p>
-                    </div>
 
                     <div>
-                        <PiPlaylist />
-                        <p>Your playlist</p>
+                        <FaHeart />
+                        <p>Favorite</p>
                     </div>
                 </div>
 
@@ -52,6 +48,11 @@ export const SideBar = () => {
                     <div>
                         <HiPlus />
                         <p>Add Music</p>
+                    </div>
+                    
+                    <div>
+                        <HiPlus />
+                        <p>Add PlayList</p>
                     </div>
                 </div>
 
@@ -62,9 +63,9 @@ export const SideBar = () => {
                                 <MdLogout />
                                 <p>Logout</p>
                             </>
-                        : 
+                            :
                             <>
-                               <MdLogout />
+                                <MdLogout />
                                 <p>Login / Sign up</p>
                             </>
                         }

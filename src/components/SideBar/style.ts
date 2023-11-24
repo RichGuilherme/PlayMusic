@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SSideBar = styled.aside`
-  width: 100%;
+  width: 308px;
   height: calc(100vh - 118px);
   
   border-right: 1px solid ${props => props.theme.colors.colorPrimary};
@@ -43,7 +43,7 @@ export const Profile = styled.div`
 
 `
 
-export const ContainerMenus = styled.div`
+export const ContainerMenus = styled.nav`
    position: relative;
    height: 66%;
    margin-top: 67px;
