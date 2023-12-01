@@ -8,7 +8,6 @@ export const SSideBar = styled.aside`
   background-color: ${props => props.theme.colors.bgSideBar};
 
   color: ${props => props.theme.colors.colorSideBar};
-  font-family: 'inter', sans-serif;
 `
 
 export const Profile = styled.div`

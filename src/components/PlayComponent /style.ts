@@ -19,7 +19,6 @@ export const MusicDetails = styled.div`
     gap: 16px;
 
     color:  #6B7280;
-    font-family: "Inter";
     
     img {
         min-width: 74px;
@@ -49,7 +48,10 @@ export const MusicDetails = styled.div`
 
 export const Volume = styled.div`
     display: flex;
+    align-items:center;
     gap: 7px;
+    
+    color: rgb(82, 82, 82);
 
     svg {
         color: #6B7280;
@@ -61,7 +63,11 @@ export const Volume = styled.div`
     }
     
     input[type="range"] {
-       background-color: black;
+       height: 5px;
+       width: 94px;
+       -webkit-appearance: none;
+       -moz-appearance: none;
+       appearance: none;
     }
 
     input[type="range"]::-webkit-slider-thumb {

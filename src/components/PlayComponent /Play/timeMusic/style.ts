@@ -8,7 +8,6 @@ export const Times = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    font-family: "Inter", sans-serif;
     color: #6B7280;
 
     span {

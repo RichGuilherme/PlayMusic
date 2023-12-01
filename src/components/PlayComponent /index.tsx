@@ -26,8 +26,8 @@ export const PlayComponent = () => {
         <img src={imag} alt="image" />
 
         <div>
-          <h1>Billie Jean</h1>
-          <p>Michael Jackson</p>
+          <h1>Arde Outra Vez</h1>
+          <p>Thalles Roberto</p>
         </div>
 
         <LuHeart size={21}/>

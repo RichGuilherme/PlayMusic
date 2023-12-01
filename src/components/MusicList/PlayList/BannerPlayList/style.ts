@@ -1,16 +1,6 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
-export const MainViewContainer = styled.main`
-    width: 100%;
-    height: 100%;
-
-    background-color: #1F1F1F;
-    color: #ffff;
-
-    overflow: auto;
-`
-
-export const BannerPlayList = styled.div`
+export const Banner = styled.div`
     position: relative;
 
     height: 30vh;
