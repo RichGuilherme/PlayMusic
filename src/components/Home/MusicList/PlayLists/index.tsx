@@ -1,6 +1,6 @@
 import { PlayListsContainer, SPlayLists } from "./style"
 
-import img from "../../../assets/Leo Season.jpg"
+import img from "../../../../assets/Leo Season.jpg"
 
 export const PlayLists = () => {
     return (

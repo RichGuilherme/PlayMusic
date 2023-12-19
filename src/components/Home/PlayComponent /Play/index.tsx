@@ -5,7 +5,7 @@ import { HiPauseCircle } from "react-icons/hi2";
 import { MdPlayCircleFilled } from "react-icons/md";
 import { LuRefreshCcw } from "react-icons/lu";
 
-import musica from "../../../assets/a-ha - Take On Me (Official Video) [Remastered in 4K]_256k.mp3"
+import musica from "../../../../assets/a-ha - Take On Me (Official Video) [Remastered in 4K]_256k.mp3"
 
 import { TimeMusic } from "./timeMusic"
 import { ContainerPlay, ControlButtons } from "./style"

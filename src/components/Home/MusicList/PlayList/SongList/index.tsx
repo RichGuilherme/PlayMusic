@@ -2,7 +2,7 @@ import { MdPlayCircleFilled } from "react-icons/md";
 import { BsThreeDots } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
 import { CardMusic, ContainerPlayList, HeaderList, ListEdit, Musics, SSongList} from "./style";
-import imgCard from "../../../../assets/Leo Season.jpg"
+import imgCard from "../../../../../assets/Leo Season.jpg"
 
 
 export const SongList = () => {

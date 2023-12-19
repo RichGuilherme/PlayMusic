@@ -1,38 +1,45 @@
-import { useState } from "react";
-
-import imageProfile from "../../assets/imageProfile.jpeg";
+import imageProfile from "../../../assets/imageProfile.jpeg";
 import { ContainerMenus, Profile, SSideBar } from "./style";
 
-import { BsGridFill, BsMoon, } from "react-icons/bs";
+import { BsMoon, } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 import { MdLogout } from "react-icons/md";
 import { AiOutlineSetting } from "react-icons/ai";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 
 export const SideBar = () => {
-    const [isRegisted, setIsRegisted] = useState(true)
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const user = async () => {
+            try {
+                const responser = await axios.get("http://localhost:4000/user/getUser/", {
+                    headers: {
+                        "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTcxZDY2MDUyOWQ2MjIyMzM2MzBiMTMiLCJpYXQiOjE3MDI5MzQzNDYsImV4cCI6MTcwMjkzNzk0Nn0.fqxzov-45AZJTF2z3y6ihN33gwYxYx5yXvC2UPk25-Q"
+                    },
+                    params: {
+                        userId: "6571d660529d622233630b13"
+                    }
+                })
+
+                console.log(responser.data)
+                } catch (erro) {
+                  console.log(erro)
+                }
+        }
+
+        user()
+    }, [])
 
     return (
         <SSideBar>
             <Profile>
-                {isRegisted ? (
-                    <>
-                        <img src={imageProfile}
-                            alt="profile" />
-                        <h1>Richard Guilherme</h1>
-                    </>
-                ) :
-                    (
-                        <>
-                            <img
-                                alt="profile" />
-                            <h1>
-                                Login / Sign up <MdKeyboardArrowRight size={29} />
-                            </h1>
-                        </>
-                    )}
+                <img src={imageProfile}
+                    alt="profile" />
+                <h1>Richard Guilherme</h1>
             </Profile>
 
             <ContainerMenus>
@@ -49,7 +56,7 @@ export const SideBar = () => {
                         <HiPlus />
                         <p>Add Music</p>
                     </div>
-                    
+
                     <div>
                         <HiPlus />
                         <p>Add PlayList</p>
@@ -58,17 +65,8 @@ export const SideBar = () => {
 
                 <div>
                     <div>
-                        {isRegisted ?
-                            <>
-                                <MdLogout />
-                                <p>Logout</p>
-                            </>
-                            :
-                            <>
-                                <MdLogout />
-                                <p>Login / Sign up</p>
-                            </>
-                        }
+                        <MdLogout />
+                        <p>Logout</p>
                     </div>
 
                     <div>

@@ -3,7 +3,7 @@ import { ContainerControlles, MusicDetails, Volume } from "./style"
 import { Play } from "./Play";
 import { useState } from "react";
 import { SlVolume2, SlVolumeOff } from "react-icons/sl";
-import imag from "../../assets/imageProfile.jpeg"
+import imag from "../../../assets/imageProfile.jpeg"
 
 export const PlayComponent = () => {
   const [volume, setVolume] = useState(50)
