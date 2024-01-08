@@ -1,38 +1,38 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { RotateDegPops } from "../../../@types/rotateProps";
 import { SForm } from "../style"
 import { Login } from "./style"
 import { FcGoogle } from "react-icons/fc";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import axiosInstancia from "../../../api/axiosConfig";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { IdContext } from "../../../context/idUser";
 
 
 export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
-    const [token, setToken] = useState("")
+    const [showPassword, setShowPassword] = useState(false)
+    const navigate = useNavigate()
+    const {setIdUser} = useContext(IdContext)
 
-    const handleLogin = async (e) => {
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:4000/user/login',
-                JSON.stringify({ email, password }),
-                {
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    }
-                }
-            )
+            const response = await axiosInstancia.post('/user/login',
+                JSON.stringify({ email, password }))
 
-            setToken(response.data)
+            localStorage.setItem("email", response.data.email)
+            localStorage.setItem("userName", response.data.username)
+            setIdUser(response.data.id)
+
+            navigate("/home")
 
         } catch (error) {
-            if (!error?.response) {
-                setError('Erro ao acessar o servidor');
-            } else if (error.response.status == 401) {
-                setError('Usuário ou senha inválidos');
-            }
+                setError(error.response.data.error)
+                console.log(error.response.data.error)
         }
 
     }
@@ -45,17 +45,32 @@ export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
                 <p>Acesse sua conta e se divirta com suas músicas</p>
             </div>
 
-            <SForm>
+            <SForm onSubmit={(e) => handleLogin(e)}>
                 <label htmlFor="email">Email</label>
                 <input
                     type="email"
                     placeholder="Escreva seu email"
                     required
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)} />
+                <span>{`${error}`}</span>
 
-                <label htmlFor="password">Senha</label>
+                <label htmlFor="password">
+                    Senha
+                    {showPassword ?
+                        <div onClick={() => setShowPassword(!showPassword)}>
+                            <BsEye
+                                size={22} />
+                        </div>
+                        :
+                        <div onClick={() => setShowPassword(!showPassword)}>
+                            <BsEyeSlash
+                                size={22} />
+                        </div>
+                    }
+                </label>
                 <input
-                    type="password"
+                    type={`${showPassword ? "text" : "password"}`}
                     placeholder="********"
                     required
                     onChange={(e) => setPassword(e.target.value)} />
@@ -65,8 +80,7 @@ export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
                     <label htmlFor="checkbox">Lembra de mim</label>
                 </div>
 
-                <button 
-                 onClick={(e) => handleLogin(e)}>
+                <button type="submit" >
                     Login
                 </button>
             </SForm>

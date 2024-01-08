@@ -83,7 +83,6 @@ export const ContainerForm = styled.div`
    }
 `
 
-
 export const SForm = styled.form`
     display: flex;
     flex-direction: column;
@@ -91,11 +90,17 @@ export const SForm = styled.form`
 
     width: 100%;
 
-    label {
+    > label {
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 10px;
+
         color: #181818;
         font-size: 14px;
         font-weight: 500;
         letter-spacing: 0.42px;
+
     }
 
     input {
@@ -119,7 +124,7 @@ export const SForm = styled.form`
         outline: none;
     }
 
-    button {
+    button{
         background: #ADFF00;
         box-shadow: 0px 4px 10px 0px rgba(233, 68, 75, 0.25);
     }

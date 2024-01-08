@@ -2,30 +2,37 @@ import { Home } from "./components/Home"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Authentication } from "./components/Authentication";
 import { ReactNode } from "react";
+import Cookies from 'js-cookie'
+import { IdContextProvider } from "./context/idUser";
+import { PlayList } from "./components/Home/MusicList/PlayList";
 
 type Props = {
   children: ReactNode
 }
 
-function App() {
-  const PrivateRoute = ( {children}: Props ) => {
-    const isAuthenticated = true
 
-    return isAuthenticated ? (
-      children
-    ) : (
-      <Navigate to="/authentication" replace />
-    )
+function App() {
+  const PrivateRoute = ({ children }: Props) => {
+    const token = Cookies.get('token')
+
+    if (token) {
+      return children
+    } else {
+      return <Navigate to="/authentication" />
+    }
   }
 
   return (
     <div className="app">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/authentication" element={<Authentication />} />
-          <Route path="/home" element={<PrivateRoute> <Home /></PrivateRoute> } />
-        </Routes>
-      </BrowserRouter>
+      <IdContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/authentication" element={<Authentication />} />
+            <Route path="/home" element={<PrivateRoute> <Home /></PrivateRoute>} />
+            
+          </Routes>
+        </BrowserRouter>
+      </IdContextProvider>
     </div>
   )
 }
