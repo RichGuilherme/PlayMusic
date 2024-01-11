@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import axiosInstancia from "../../../api/axiosConfig";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { IdContext } from "../../../context/idUser";
+import { IdContext } from "../../../context/idContext";
 
 
 export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
