@@ -1,5 +1,6 @@
 import { RefObject, useEffect, useRef, useState } from "react"
 import { ContainerTimeMusic, ProgressBar, Times } from "./style";
+import { SecondForMin } from "../../../../../utils/SecondForMin";
 
 type TimeMusicProps = {
     audioPlayRef: RefObject<HTMLAudioElement>;
@@ -36,20 +37,9 @@ export const TimeMusic = ({ audioPlayRef }: TimeMusicProps) => {
 
             const currentTime = Math.floor(audioPlayRef?.current?.currentTime || 0)
             const duration = Math.floor(audioPlayRef?.current?.duration || 0)
-
-            const secondForMin = (second = 0) => {
-                const campoMinutos = String(Math.floor(second / 60))
-                let campoSegundos = String(second % 60)
-                
-                if (Number(campoSegundos) < 10) {
-                    campoSegundos = '0' + campoSegundos
-                }
-
-                return campoMinutos + ':' + campoSegundos
-            }
-
-            setDurationAudio(secondForMin(duration))
-            setStartTime(secondForMin(currentTime))
+            
+            setDurationAudio(SecondForMin(duration) )
+            setStartTime(SecondForMin(currentTime))
         }, 1000)
 
 

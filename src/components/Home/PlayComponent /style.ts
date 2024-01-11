@@ -17,8 +17,8 @@ export const MusicDetails = styled.div`
     display: flex;
     align-items: center;
     gap: 16px;
-
     color:  #6B7280;
+    width: 23%;
     
     img {
         min-width: 74px;
@@ -27,23 +27,29 @@ export const MusicDetails = styled.div`
         object-fit: cover;
         box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.05), 0px 13px 20px -4px rgba(0, 0, 0, 0.10);
     }
-    
+
+    div {
+        /* min-width: 250px; */
+    }
     div h1{
         color: #ffff;
-        font-size: 18.667px;
+        font-size: 14px;
         font-weight: 500  
     }
 
     div p{
-        font-size: 16px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 400;
-        line-height: 21.333px; /* 133.333% */
+        line-height: 21.333px; 
     }
 
     svg {
         cursor: pointer;
     }
+`
+export const VoidDetails = styled.div`
+   width: 300px;
 `
 
 export const Volume = styled.div`

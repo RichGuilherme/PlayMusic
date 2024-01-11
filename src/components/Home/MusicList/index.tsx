@@ -8,9 +8,7 @@ export const MusicList = () => {
 
   return (
     <MainViewContainer>
-         <PlayList />
-         {/* <PlayLists /> */}
+       <PlayList />
     </MainViewContainer>
-
   )
 }

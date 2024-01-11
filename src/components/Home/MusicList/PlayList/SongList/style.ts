@@ -52,7 +52,8 @@ export const Musics = styled.div`
     flex-direction: column;
 `
 
-export const CardMusic = styled.div`
+
+export const CardMusic = styled.div<{ $primary?: string; }>`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,9 +62,10 @@ export const CardMusic = styled.div`
     padding: 5px 30px;
     
     cursor: pointer;
-
+    
     // Title
     div:first-child {
+        width: 190px;
         display: flex;
         align-items: center;
         gap: 22px;
@@ -76,11 +78,16 @@ export const CardMusic = styled.div`
         }
     
         > div {
+            min-width: 380px;
+
             display: flex;
             align-items: center;
             gap: 10px;
 
             a {
+                &[id='${props => props.$primary}']{
+                  color: ${props => props.theme.colors.colorPrimary};
+                }
               color: #ffff;
             }
         }
@@ -90,7 +97,6 @@ export const CardMusic = styled.div`
     div > span{
         color: #6B7280;
 }
-
 
     // Artista
     > span:nth-of-type(1) {

@@ -5,7 +5,7 @@ import { HiPauseCircle } from "react-icons/hi2";
 import { MdPlayCircleFilled } from "react-icons/md";
 import { LuRefreshCcw } from "react-icons/lu";
 
-import musica from "../../../../assets/a-ha - Take On Me (Official Video) [Remastered in 4K]_256k.mp3"
+// import musica from "../../../../assets/a-ha - Take On Me (Official Video) [Remastered in 4K]_256k.mp3"
 
 import { TimeMusic } from "./timeMusic"
 import { ContainerPlay, ControlButtons } from "./style"
@@ -13,13 +13,14 @@ import { ContainerPlay, ControlButtons } from "./style"
 type PlayProps = {
     volumeProps: number
     muted: boolean
+    music: string
 }
 
-export const Play = ({volumeProps, muted}: PlayProps) => {
+export const Play = ({volumeProps, muted, music}: PlayProps) => {
     const audioPlayRef = useRef<HTMLAudioElement>(null)
     const [playing, setPlaying] = useState(false)
     const [loop, setLoop] = useState(false)
-    
+    const [musica, setMusica] = useState(`${music}`)
 
     useEffect(() => {
         if (audioPlayRef.current) {
@@ -37,6 +38,9 @@ export const Play = ({volumeProps, muted}: PlayProps) => {
         }
     }, [playing])
 
+    useEffect(() => {
+        setMusica(music)
+    },[music])
 
     return (
         <ContainerPlay>
@@ -74,7 +78,6 @@ export const Play = ({volumeProps, muted}: PlayProps) => {
             </ControlButtons>
 
             <TimeMusic audioPlayRef={audioPlayRef} />
-
 
             <audio
                 src={musica}

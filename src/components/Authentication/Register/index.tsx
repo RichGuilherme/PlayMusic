@@ -25,7 +25,7 @@ export const RegisterBack = ({ isRotateCard }: RotateDegPops) => {
 
             localStorage.setItem("email", response.data.email)
             localStorage.setItem("userName", response.data.username)
-            navigate("/home")
+            navigate("/authentication")
 
         } catch (error) {
             console.log('Usuário ou senha inválidos', error.response.data);

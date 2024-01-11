@@ -1,7 +1,16 @@
+import axiosInstancia from "../../../../../api/axiosConfig";
 import { Banner, ThumbnailPlayList, TitlePlayList } from "./style"
 import { CiMusicNote1 } from "react-icons/ci";
+import { useAxios } from "../../../../../hooks/useAxios";
+import { sumDuration } from "../../../../../utils/SecondForMin";
 
 export const BannerPlayList = () => {
+    const [descritions, loading, error] = useAxios({
+        axiosInstance: axiosInstancia,
+        method: "GET",
+        url: "http://localhost:4000/user/getDescritionPlaylist"
+    })
+   
     return (
         <Banner>
             <div></div>
@@ -14,14 +23,14 @@ export const BannerPlayList = () => {
                 </ThumbnailPlayList>
 
                 <TitlePlayList>
-                    <h1>Minha Playlist n°1</h1>
+                    <h1>{descritions?.namePlayList}</h1>
 
                     <span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.consequuntur sed natus eum deserunt beatae sequi quas dolore sapiente doloremque quae ipsam.</p>
+                        <p>{descritions?.descritionPlaylist}</p>
                     </span>
 
                     <span>
-                        <p>• 8 músicas, 23min 32s</p>
+                        <p>{`• ${descritions?.sumMusics} músicas, ${sumDuration(descritions?.sumDurations)}`}</p>
                     </span>
                 </TitlePlayList>
             </div>

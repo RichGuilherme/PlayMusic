@@ -1,13 +1,20 @@
 import { LuHeart } from "react-icons/lu";
-import { ContainerControlles, MusicDetails, Volume } from "./style"
+import { ContainerControlles, MusicDetails, VoidDetails, Volume } from "./style"
 import { Play } from "./Play";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SlVolume2, SlVolumeOff } from "react-icons/sl";
-import imag from "../../../assets/imageProfile.jpeg"
+import { IdContext } from "../../../context/idContext";
 
 export const PlayComponent = () => {
   const [volume, setVolume] = useState(50)
   const [mute, setMute] = useState(false)
+  const { idMusic } = useContext(IdContext)
+  const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    setImageUrl(idMusic.thumbnail)
+  }, [idMusic])
+
 
   const handleMute = () => {
     if (!mute) {
@@ -22,18 +29,25 @@ export const PlayComponent = () => {
 
   return (
     <ContainerControlles>
-      <MusicDetails>
-        <img src={imag} alt="image" />
+      {idMusic.length !== 0 ?
+        <MusicDetails>
+          <img src={imageUrl} alt="image" />
 
-        <div>
-          <h1>Arde Outra Vez</h1>
-          <p>Thalles Roberto</p>
-        </div>
+          <div>
+            <h1>{idMusic.title}</h1>
+            <p>{idMusic.artist}</p>
+          </div>
 
-        <LuHeart size={21}/>
-      </MusicDetails>
+          <LuHeart size={21} />
+        </MusicDetails>
+        :
+        <VoidDetails></VoidDetails>
+      }
 
-      <Play volumeProps={volume} muted={mute} />
+      <Play
+        volumeProps={volume}
+        muted={mute}
+        music={idMusic.storage_url} />
 
       <Volume>
         <div onClick={() => handleMute()}>

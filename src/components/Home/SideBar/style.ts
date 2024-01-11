@@ -107,3 +107,55 @@ export const ContainerMenus = styled.nav`
        width: 26px;
     }
 `
+
+export const SwitchButton = styled.label`
+     font-size: 17px;
+     position: relative;
+     display: inline-block;
+     width: 3.7em;
+     height: 1.8em;
+    
+    
+    > input {
+     display: none;
+     opacity: 0;
+     width: 0;
+     height: 0;
+    }
+    
+    .slider {
+     position: absolute;
+     cursor: pointer;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background-color: #313033;
+     transition: .2s;
+     border-radius: 30px;
+    }
+    
+    .slider:before {
+     position: absolute;
+     content: "";
+     height: 1.4em;
+     width: 1.4em;
+     border-radius: 20px;
+     left: 0.2em;
+     bottom: 0.2em;
+     background-color: #aeaaae;
+     transition: .4s;
+    }
+    
+    input:checked + .slider::before {
+     background-color: ${props => props.theme.colors.colorPrimary}
+    }
+    
+    input:focus + .slider {
+     box-shadow: 0 0 1px #3a4b39;
+    }
+    
+    input:checked + .slider:before {
+     transform: translateX(1.9em);
+    }
+`
