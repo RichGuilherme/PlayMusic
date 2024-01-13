@@ -2,28 +2,34 @@ import { MdPlayCircleFilled } from "react-icons/md";
 import { BsThreeDots } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
 import { CardMusic, ContainerPlayList, HeaderList, ListEdit, Musics, SSongList } from "./style";
-import imgCard from "../../../../../assets/Leo Season.jpg"
 import { useAxios } from "../../../../../hooks/useAxios";
 import axiosInstancia from "../../../../../api/axiosConfig";
 import { SecondForMin } from "../../../../../utils/SecondForMin";
-import { useContext, useState } from "react";
-import { IdContext } from "../../../../../context/idContext";
+import { useContext, useEffect, useState } from "react";
+import { MusicContext } from "../../../../../context/musicContext";
 
 
 export const SongList = () => {
-    const { setIdMusic } = useContext(IdContext)
+    const { setMusicCurrent,
+        setDataListMusic,
+        setCurrentIndex } = useContext(MusicContext)
     const [indexCardMusic, setIndexCardMusic] = useState<string | number>("")
     const [data, loading, error] = useAxios({
         axiosInstance: axiosInstancia,
         method: "GET",
         url: "http://localhost:4000/music/getMusics"
     })
-    
-    const handleCardMusic = (index: number, data: any) => {
-        setIdMusic(data)
+
+    const handleCardMusic = (index: number, data: dataProps) => {
+        setMusicCurrent(data)
+        setCurrentIndex(index)
         setIndexCardMusic(index)
     }
-   
+
+    useEffect(() => {
+        setDataListMusic(data)
+    }, [data])
+
     return (
         <SSongList>
             <ListEdit>
