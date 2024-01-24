@@ -1,17 +1,22 @@
 import imageProfile from "../../../assets/imageProfile.jpeg";
 import { ContainerMenus, Profile, SSideBar, SwitchButton } from "./style";
+import Cookies from 'js-cookie'
 
 import { BsMoon, } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 import { MdLogout } from "react-icons/md";
 import { AiOutlineSetting } from "react-icons/ai";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 export const SideBar = () => {
+    const navigate = useNavigate()
 
+    const handleLogout = () => {
+        navigate("/authentication")
+        Cookies.remove('token')
+    }
 
     return (
         <SSideBar>
@@ -38,7 +43,7 @@ export const SideBar = () => {
                 </div>
 
                 <div>
-                    <div>
+                    <div onClick={() => handleLogout()}>
                         <MdLogout />
                         <p>Logout</p>
                     </div>

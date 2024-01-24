@@ -28,7 +28,8 @@ export const ProgressBar = styled.div`
    div {
       position: relative;
       height: 100%;
-
+      width: 100%;
+      
       border-radius: 100px;
     
       background-color: #fff;

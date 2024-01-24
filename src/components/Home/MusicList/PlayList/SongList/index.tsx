@@ -8,10 +8,10 @@ import axiosInstancia from "../../../../../api/axiosConfig";
 
 import { SecondForMin } from "../../../../../utils/SecondForMin";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveSong, songData } from "../../../../../redux/features/playerSlice";
+import { activePlay, setActiveSong, songData } from "../../../../../redux/features/playerSlice";
 import { RootState } from "../../../../../redux/store";
 
 
@@ -25,14 +25,17 @@ export const SongList = () => {
         url: "http://localhost:4000/music/getMusics"
     })
 
+    const songCurrentIndex = data
+    
     const handleCardMusic = (index: number, song: songData) => {
         
         dispatch(setActiveSong({song, data, i: index}))
+        dispatch(activePlay(true))
     }
 
     useEffect(() => {
-        dispatch(setActiveSong({ song: null, data, i: 0 }))
-    }, [data, dispatch])
+        dispatch(setActiveSong({ song: songCurrentIndex?.musics[0], data, i: 0 }))
+    }, [data, dispatch, songCurrentIndex])
 
     return (
         <SSongList>

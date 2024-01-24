@@ -14,9 +14,8 @@ export const PlayComponent = () => {
     activeSong,
     currentIndex,
     currentSongs,
-    isPlaying,
-    isActive } = useSelector((state: RootState) => state.player)
-  const [imageUrl, setImageUrl] = useState("");
+    isActive} = useSelector((state: RootState) => state.player)
+  const [imageUrl, setImageUrl] = useState("")
 
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export const PlayComponent = () => {
       setImageUrl(activeSong.thumbnail)
       
     }
-  }, [activeSong])
+  }, [activeSong, currentSongs])
 
 
   const handleMute = () => {
@@ -40,13 +39,13 @@ export const PlayComponent = () => {
 
   return (
     <ContainerControlles>
-      {activeSong !== null ?
+      {activeSong !== null && isActive ?
         <MusicDetails>
           <img src={imageUrl} alt="image" />
 
           <div>
-            <h1>{activeSong.title}</h1>
-            <p>{activeSong.artist}</p>
+            <h1>{activeSong?.title}</h1>
+            <p>{activeSong?.artist}</p>
           </div>
 
           <LuHeart size={21} />

@@ -5,7 +5,7 @@ import { useAxios } from "../../../../../hooks/useAxios";
 import { sumDuration } from "../../../../../utils/SecondForMin";
 
 export const BannerPlayList = () => {
-    const [descritions, loading, error] = useAxios({
+const {data:descritions} = useAxios({
         axiosInstance: axiosInstancia,
         method: "GET",
         url: "http://localhost:4000/user/getDescritionPlaylist"

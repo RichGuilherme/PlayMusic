@@ -13,7 +13,7 @@ interface player {
         duration: number,
         thumbnail: string,
         storage_url: string,
-    } 
+    }
 }
 
 export type songData = {
@@ -46,37 +46,32 @@ const playerSlice = createSlice({
             }
 
             state.currentIndex = action.payload.i;
-            state.isActive = true;
         },
 
         nextSong: (state, action) => {
-            if (state.currentSongs[action.payload]?.track) {
-                state.activeSong = state.currentSongs[action.payload]?.track;
-            } else {
-                state.activeSong = state.currentSongs[action.payload];
-            }
+            state.activeSong = state.currentSongs.musics[action.payload]
+
 
             state.currentIndex = action.payload;
             state.isActive = true;
         },
 
         prevSong: (state, action) => {
-            if (state.currentSongs[action.payload]?.track) {
-                state.activeSong = state.currentSongs[action.payload]?.track;
-            } else {
-                state.activeSong = state.currentSongs[action.payload];
-            }
+            state.activeSong = state.currentSongs.musics[action.payload]
 
             state.currentIndex = action.payload;
             state.isActive = true;
         },
 
         playPause: (state, action) => {
-            state.isPlaying = action.payload;
+            state.isPlaying = action.payload
         },
+        activePlay: (state, action) => {
+            state.isActive = action.payload
+        }
     },
 })
 
-export const { setActiveSong, nextSong, prevSong, playPause } = playerSlice.actions;
+export const { setActiveSong, nextSong, prevSong, playPause, activePlay } = playerSlice.actions;
 
 export default playerSlice.reducer;

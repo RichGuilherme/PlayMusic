@@ -4,16 +4,17 @@ import { TimeMusic } from "./timeMusic"
 import { ContainerPlay } from "./style"
 import { Controllers } from "./ControlButtons"
 import { useDispatch } from "react-redux"
-import { nextSong, playPause, songData } from "../../../../redux/features/playerSlice"
+import { activePlay, nextSong, prevSong, songData } from "../../../../redux/features/playerSlice"
 
 type PlayProps = {
     volumeProps: number
     muted: boolean
     music: string
     duration: number
-    currentIndex: number 
-    currentSongs: songData[]
+    currentIndex: number
+    currentSongs: { musics: songData[] }
 }
+
 
 export const Play = ({ volumeProps, muted, music, duration, currentSongs, currentIndex }: PlayProps) => {
     const [playing, setPlaying] = useState(false)
@@ -24,25 +25,40 @@ export const Play = ({ volumeProps, muted, music, duration, currentSongs, curren
     const dispatch = useDispatch()
     const audioPlayRef = useRef<HTMLAudioElement>(null)
 
-    if (audioPlayRef.current) {
-        if (playing) {
-            audioPlayRef.current?.play()
-        } else {
-            audioPlayRef.current?.pause()
-        }
-    }
 
     const handleNextSong = () => {
-        dispatch(playPause(false));
+        let nextIndex;
 
-       
-            dispatch(nextSong((currentIndex + 1) % currentSongs?.length));
-      
+        if (!shuffle) {
+            nextIndex = (currentIndex + 1) % currentSongs.musics.length
+        } else {
+            do {
+                nextIndex = Math.floor(Math.random() * currentSongs.musics.length)
+            } while (nextIndex === currentIndex);
+        }
+
+        dispatch(nextSong(nextIndex))
+
     }
 
     const handlePrevSong = () => {
-
+        if (currentIndex === 0) {
+            dispatch(prevSong(currentSongs?.musics.length - 1))
+        } else {
+            dispatch(prevSong(currentIndex - 1))
+        }
     }
+    
+    useEffect(() => {
+        if (audioPlayRef.current) {
+            if (playing) {
+                dispatch(activePlay(true))
+                audioPlayRef.current.play()
+            } else {
+                audioPlayRef.current.pause()
+            }
+        }
+    }, [playing, dispatch])
 
     useEffect(() => {
         if (audioPlayRef.current) {
@@ -60,9 +76,11 @@ export const Play = ({ volumeProps, muted, music, duration, currentSongs, curren
         <ContainerPlay>
             <Controllers
                 setPlaying={setPlaying}
+                playing={playing}
                 setLoop={setLoop}
                 loop={loop}
-                playing={playing}
+                setShuffle={setShuffle}
+                shuffle={shuffle}
                 handleNextSong={handleNextSong}
                 handlePrevSong={handlePrevSong} />
 
