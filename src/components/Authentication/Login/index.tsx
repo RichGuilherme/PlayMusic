@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { RotateDegPops } from "../../../@types/rotateProps";
 import { SForm } from "../style"
 import { Login } from "./style"
@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import axiosInstancia from "../../../api/axiosConfig";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { IdContext } from "../../../context/idContext";
+import axios from "axios";
 
 
 export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
@@ -15,7 +15,6 @@ export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
     const [error, setError] = useState("")
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
-    const {setIdUser} = useContext(IdContext)
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,13 +25,15 @@ export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
 
             localStorage.setItem("email", response.data.email)
             localStorage.setItem("userName", response.data.username)
-            setIdUser(response.data.id)
+
 
             navigate("/home")
 
         } catch (error) {
-                setError(error.response.data.error)
-                console.log(error.response.data.error)
+            if(axios.isAxiosError(error)){
+                setError(error.response?.data.error)
+                console.log(error)
+            }
         }
 
     }
