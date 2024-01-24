@@ -1,87 +1,80 @@
 import { useEffect, useRef, useState } from "react"
-import { HiOutlineSwitchHorizontal } from "react-icons/hi";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { HiPauseCircle } from "react-icons/hi2";
-import { MdPlayCircleFilled } from "react-icons/md";
-import { LuRefreshCcw } from "react-icons/lu";
-
-// import musica from "../../../../assets/a-ha - Take On Me (Official Video) [Remastered in 4K]_256k.mp3"
 
 import { TimeMusic } from "./timeMusic"
-import { ContainerPlay, ControlButtons } from "./style"
+import { ContainerPlay } from "./style"
+import { Controllers } from "./ControlButtons"
+import { useDispatch } from "react-redux"
+import { nextSong, playPause, songData } from "../../../../redux/features/playerSlice"
 
 type PlayProps = {
     volumeProps: number
     muted: boolean
     music: string
+    duration: number
+    currentIndex: number 
+    currentSongs: songData[]
 }
 
-export const Play = ({volumeProps, muted, music}: PlayProps) => {
-    const audioPlayRef = useRef<HTMLAudioElement>(null)
+export const Play = ({ volumeProps, muted, music, duration, currentSongs, currentIndex }: PlayProps) => {
     const [playing, setPlaying] = useState(false)
     const [loop, setLoop] = useState(false)
+    const [shuffle, setShuffle] = useState(false)
     const [musica, setMusica] = useState(`${music}`)
 
-    useEffect(() => {
-        if (audioPlayRef.current) {
-            
-          audioPlayRef.current.volume = volumeProps / 100  
-        }
-      }, [audioPlayRef, volumeProps]);
-        
+    const dispatch = useDispatch()
+    const audioPlayRef = useRef<HTMLAudioElement>(null)
 
-    useEffect(() => {
+    if (audioPlayRef.current) {
         if (playing) {
             audioPlayRef.current?.play()
         } else {
             audioPlayRef.current?.pause()
         }
-    }, [playing])
+    }
+
+    const handleNextSong = () => {
+        dispatch(playPause(false));
+
+       
+            dispatch(nextSong((currentIndex + 1) % currentSongs?.length));
+      
+    }
+
+    const handlePrevSong = () => {
+
+    }
 
     useEffect(() => {
+        if (audioPlayRef.current) {
+
+            audioPlayRef.current.volume = volumeProps / 100
+        }
+    }, [audioPlayRef, volumeProps])
+
+    // atualizar a música
+    useEffect(() => {
         setMusica(music)
-    },[music])
+    }, [music])
 
     return (
         <ContainerPlay>
-            <ControlButtons>
-                <button>
-                    <HiOutlineSwitchHorizontal size={23} />
-                </button>
+            <Controllers
+                setPlaying={setPlaying}
+                setLoop={setLoop}
+                loop={loop}
+                playing={playing}
+                handleNextSong={handleNextSong}
+                handlePrevSong={handlePrevSong} />
 
-                <button>
-                    <FiChevronLeft size={23} />
-                </button>
-
-                <button onClick={() => setPlaying(!playing)}>
-                    {playing ?
-                        <HiPauseCircle
-
-                            size={41} />
-                        :
-                        <MdPlayCircleFilled
-                            size={41} />
-                    }
-                </button>
-
-                <button>
-                    <FiChevronRight size={23} />
-                </button>
-
-                <button
-                    onClick={() => setLoop(!loop)}
-                    style={{ color: `${loop ? "#ffff" : ""}` }}
-                >
-
-                    <LuRefreshCcw size={23} />
-                </button>
-            </ControlButtons>
-
-            <TimeMusic audioPlayRef={audioPlayRef} />
+            <TimeMusic
+                audioPlayRef={audioPlayRef}
+                durationAudio={duration} />
 
             <audio
                 src={musica}
                 ref={audioPlayRef}
+                autoPlay={playing}
+                onEnded={handleNextSong}
                 loop={loop}
                 muted={muted}>
             </audio>

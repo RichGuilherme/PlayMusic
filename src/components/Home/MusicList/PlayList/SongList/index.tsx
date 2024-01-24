@@ -2,33 +2,37 @@ import { MdPlayCircleFilled } from "react-icons/md";
 import { BsThreeDots } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
 import { CardMusic, ContainerPlayList, HeaderList, ListEdit, Musics, SSongList } from "./style";
+
 import { useAxios } from "../../../../../hooks/useAxios";
 import axiosInstancia from "../../../../../api/axiosConfig";
+
 import { SecondForMin } from "../../../../../utils/SecondForMin";
-import { useContext, useEffect, useState } from "react";
-import { MusicContext } from "../../../../../context/musicContext";
+
+import { useEffect, useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveSong, songData } from "../../../../../redux/features/playerSlice";
+import { RootState } from "../../../../../redux/store";
 
 
 export const SongList = () => {
-    const { setMusicCurrent,
-        setDataListMusic,
-        setCurrentIndex } = useContext(MusicContext)
-    const [indexCardMusic, setIndexCardMusic] = useState<string | number>("")
-    const [data, loading, error] = useAxios({
+    const currentIndex = useSelector((state: RootState) => state.player.currentIndex)
+    const dispatch = useDispatch()
+
+    const {data } = useAxios({
         axiosInstance: axiosInstancia,
         method: "GET",
         url: "http://localhost:4000/music/getMusics"
     })
 
-    const handleCardMusic = (index: number, data: dataProps) => {
-        setMusicCurrent(data)
-        setCurrentIndex(index)
-        setIndexCardMusic(index)
+    const handleCardMusic = (index: number, song: songData) => {
+        
+        dispatch(setActiveSong({song, data, i: index}))
     }
 
     useEffect(() => {
-        setDataListMusic(data)
-    }, [data])
+        dispatch(setActiveSong({ song: null, data, i: 0 }))
+    }, [data, dispatch])
 
     return (
         <SSongList>
@@ -75,7 +79,7 @@ export const SongList = () => {
                     {data?.musics?.map((data, index: number) => (
                         <CardMusic
                             key={index}
-                            $primary={`${indexCardMusic}`}
+                            $primary={`${currentIndex}`}
                             onClick={() => handleCardMusic(index, data)}>
                             <div>
                                 <span>{index + 1}</span>

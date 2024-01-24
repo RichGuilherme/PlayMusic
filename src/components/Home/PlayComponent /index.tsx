@@ -1,19 +1,30 @@
 import { LuHeart } from "react-icons/lu";
 import { ContainerControlles, MusicDetails, VoidDetails, Volume } from "./style"
 import { Play } from "./Play";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SlVolume2, SlVolumeOff } from "react-icons/sl";
-import { MusicContext } from "../../../context/musicContext";
+import { RootState } from "../../../redux/store";
+import { useSelector } from "react-redux";
+
 
 export const PlayComponent = () => {
   const [volume, setVolume] = useState(50)
   const [mute, setMute] = useState(false)
-  const { musicCurrent } = useContext(MusicContext)
+  const {
+    activeSong,
+    currentIndex,
+    currentSongs,
+    isPlaying,
+    isActive } = useSelector((state: RootState) => state.player)
   const [imageUrl, setImageUrl] = useState("");
 
+
   useEffect(() => {
-    setImageUrl(musicCurrent.thumbnail)
-  }, [musicCurrent])
+    if (activeSong && activeSong.thumbnail) {
+      setImageUrl(activeSong.thumbnail)
+      
+    }
+  }, [activeSong])
 
 
   const handleMute = () => {
@@ -29,13 +40,13 @@ export const PlayComponent = () => {
 
   return (
     <ContainerControlles>
-      {musicCurrent.length !== 0 ?
+      {activeSong !== null ?
         <MusicDetails>
           <img src={imageUrl} alt="image" />
 
           <div>
-            <h1>{musicCurrent.title}</h1>
-            <p>{musicCurrent.artist}</p>
+            <h1>{activeSong.title}</h1>
+            <p>{activeSong.artist}</p>
           </div>
 
           <LuHeart size={21} />
@@ -47,7 +58,10 @@ export const PlayComponent = () => {
       <Play
         volumeProps={volume}
         muted={mute}
-        music={musicCurrent.storage_url} />
+        currentIndex={currentIndex}
+        currentSongs={currentSongs}
+        music={activeSong?.storage_url}
+        duration={activeSong?.duration} />
 
       <Volume>
         <div onClick={() => handleMute()}>

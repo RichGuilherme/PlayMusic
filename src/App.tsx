@@ -3,13 +3,12 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Authentication } from "./components/Authentication";
 import { ReactNode } from "react";
 import Cookies from 'js-cookie'
-import { IdContextProvider } from "./context/idContext";
+
 
 
 type Props = {
   children: ReactNode
 }
-
 
 function App() {
   const PrivateRoute = ({ children }: Props) => {
@@ -24,15 +23,13 @@ function App() {
 
   return (
     <div className="app">
-      <IdContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/authentication" element={<Authentication />} />
-            <Route path="/home" element={<PrivateRoute> <Home /></PrivateRoute>} />
-            
-          </Routes>
-        </BrowserRouter>
-      </IdContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/authentication" element={<Authentication />} />
+          <Route path="/home" element={<PrivateRoute> <Home /></PrivateRoute>} />
+
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }
