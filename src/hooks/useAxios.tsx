@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { useEffect, useState } from 'react'
 
 type useAxiosProps = {
@@ -10,18 +10,26 @@ type useAxiosProps = {
 
 export type ApiResponse = {
   musics: MusicData[]
+
+  //Descritions data
+  namePlayList: string
+  descritionPlaylist: string
+  sumMusics: number
+  sumDurations: number
 }
 
-export type MusicData = {
-  _id: string,
-  user_id: string,
-  title: string,
-  artist: string,
-  duration: number,
-  thumbnail: string,
-  storage_url: string,
+type MusicData = {
+  _id: string
+  user_id: string
+  title: string
+  artist: string
+  duration: number
+  thumbnail: string
+  storage_url: string
   __v: number
 }
+
+
 
 export const useAxios = ({ axiosInstance, method, url, requestConfig }: useAxiosProps) => {
   const [loading, setLoading] = useState(true)
@@ -37,8 +45,10 @@ export const useAxios = ({ axiosInstance, method, url, requestConfig }: useAxios
 
         setData(response.data)
       } catch (error) {
-        console.log(error.message)
-        setError(error.message)
+        if(axios.isAxiosError(error)){
+          console.log(error.message)
+          setError(error.message)
+        }
       } finally {
         setLoading(false)
       }
@@ -46,5 +56,5 @@ export const useAxios = ({ axiosInstance, method, url, requestConfig }: useAxios
 
     fetchData()
   }, [axiosInstance, method, requestConfig, url])
-  return [data, loading, error]
+  return {data, loading, error}
 }
