@@ -8,9 +8,13 @@ import { HiPlus } from "react-icons/hi";
 import { MdLogout } from "react-icons/md";
 import { AiOutlineSetting } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "../../modal";
+import { AddMusic } from "./addMusic";
+import { useState } from "react";
 
 
 export const SideBar = () => {
+    const [openModal, setOpenModal] = useState(false)
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -18,53 +22,66 @@ export const SideBar = () => {
         Cookies.remove('token')
     }
 
+    const handleClose = () => {
+        setOpenModal(!openModal)
+    }
+
     return (
-        <SSideBar>
-            <Profile>
-                <img src={imageProfile}
-                    alt="profile" />
-                <h1>{localStorage.getItem("userName")}</h1>
-            </Profile>
+        <>
+            <SSideBar>
+                <Profile>
+                    <img src={imageProfile}
+                        alt="profile" />
+                    <h1>{localStorage.getItem("userName")}</h1>
+                </Profile>
 
-            <ContainerMenus>
-                <div>
-
+                <ContainerMenus>
                     <div>
-                        <FaHeart />
-                        <p>Favorite</p>
-                    </div>
-                </div>
 
-                <div>
-                    <div>
-                        <HiPlus />
-                        <p>Add Music</p>
-                    </div>
-                </div>
-
-                <div>
-                    <div onClick={() => handleLogout()}>
-                        <MdLogout />
-                        <p>Logout</p>
+                        <div>
+                            <FaHeart />
+                            <p>Favorite</p>
+                        </div>
                     </div>
 
                     <div>
-                        <BsMoon />
-                        <p>Dark Mode</p>
-
-
-                        <SwitchButton>
-                            <input type="checkbox" />
-                                <span className= "slider"></span>
-                        </SwitchButton>
+                        <div onClick={() => setOpenModal(!openModal)}>
+                            <HiPlus />
+                            <p>Add Music</p>
+                        </div>
                     </div>
 
                     <div>
-                        <AiOutlineSetting />
-                        <p>Setting</p>
+                        <div onClick={() => handleLogout()}>
+                            <MdLogout />
+                            <p>Logout</p>
+                        </div>
+
+                        <div>
+                            <BsMoon />
+                            <p>Dark Mode</p>
+
+
+                            <SwitchButton>
+                                <input type="checkbox" />
+                                <span className="slider"></span>
+                            </SwitchButton>
+                        </div>
+
+                        <div>
+                            <AiOutlineSetting />
+                            <p>Setting</p>
+                        </div>
                     </div>
-                </div>
-            </ContainerMenus>
-        </SSideBar>
+                </ContainerMenus>
+
+                <Modal show={openModal} handleClose={handleClose}>
+                    <AddMusic />
+                </Modal>
+
+            </SSideBar>
+
+        </>
+
     )
 }
