@@ -56,8 +56,6 @@ export const Volume = styled.div`
     display: flex;
     align-items:center;
     gap: 7px;
-    
-    color: rgb(82, 82, 82);
 
     svg {
         color: #6B7280;
@@ -71,6 +69,12 @@ export const Volume = styled.div`
     input[type="range"] {
        height: 5px;
        width: 94px;
+       
+       background:   rgb(82, 82, 82);
+       border-radius: 50px;
+       margin-bottom: 4px;
+
+       overflow: hidden;
        -webkit-appearance: none;
        -moz-appearance: none;
        appearance: none;
@@ -78,6 +82,14 @@ export const Volume = styled.div`
 
     input[type="range"]::-webkit-slider-thumb {
        appearance: none;
+       width: 0;
+       height: 0;
+       -webkit-box-shadow: -200px 0 0 200px #fff;
+       box-shadow: -200px 0 0 200px #fff;
+    }
+
+    &:hover input[type="range"] {
+       height: 10px
     }
     
 

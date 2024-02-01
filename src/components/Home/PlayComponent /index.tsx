@@ -2,7 +2,7 @@ import { LuHeart } from "react-icons/lu";
 import { ContainerControlles, MusicDetails, VoidDetails, Volume } from "./style"
 import { Play } from "./Play";
 import { useEffect, useState } from "react";
-import { SlVolume2, SlVolumeOff } from "react-icons/sl";
+import { SlVolume1, SlVolume2, SlVolumeOff} from "react-icons/sl";
 import { RootState } from "../../../redux/store";
 import { useSelector } from "react-redux";
 
@@ -10,18 +10,19 @@ import { useSelector } from "react-redux";
 export const PlayComponent = () => {
   const [volume, setVolume] = useState(50)
   const [mute, setMute] = useState(false)
+  const [imageUrl, setImageUrl] = useState("")
   const {
     activeSong,
     currentIndex,
     currentSongs,
-    isActive} = useSelector((state: RootState) => state.player)
-  const [imageUrl, setImageUrl] = useState("")
+    isActive,
+    isPlaying } = useSelector((state: RootState) => state.player)
 
 
   useEffect(() => {
     if (activeSong && activeSong.thumbnail) {
       setImageUrl(activeSong.thumbnail)
-      
+
     }
   }, [activeSong, currentSongs])
 
@@ -57,6 +58,7 @@ export const PlayComponent = () => {
       <Play
         volumeProps={volume}
         muted={mute}
+        isPlaying={isPlaying}
         currentIndex={currentIndex}
         currentSongs={currentSongs}
         music={activeSong?.storage_url}
@@ -65,11 +67,11 @@ export const PlayComponent = () => {
       <Volume>
         <div onClick={() => handleMute()}>
           {mute ?
-            <SlVolumeOff
-              size={25} />
-            :
-            <SlVolume2
-              size={25} />
+            <SlVolumeOff size={25} /> :
+            volume >= 50 ?
+              <SlVolume2 size={25} /> 
+              :
+              <SlVolume1 size={25}/>
           }
         </div>
 
