@@ -50,18 +50,19 @@ export const HeaderList = styled.div`
 export const Musics = styled.div`
     display: flex;
     flex-direction: column;
+    
+    position: relative;
+
 `
 
 
-export const CardMusic = styled.div<{ $primary?: string; }>`
+export const CardMusic = styled.div<{ $ColorIndex?: string; $ColorIndex2?: string }>`
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     border-radius: 8px;
     padding: 5px 30px;
-    
-    cursor: pointer;
     
     // Title
     div:first-child {
@@ -85,18 +86,24 @@ export const CardMusic = styled.div<{ $primary?: string; }>`
             gap: 10px;
 
             a {
-                &[id='${props => props.$primary}']{
+                &[id='${props => props.$ColorIndex}']{
                   color: ${props => props.theme.colors.colorPrimary};
                 }
+              cursor: default;
               color: #ffff;
             }
         }
     }
 
+    // Color numeração, artista e duração
     > span, 
     div > span{
         color: #6B7280;
-}
+    }
+
+    div > span[id='${props => props.$ColorIndex2}'] {
+        color: ${props => props.theme.colors.colorPrimary};
+    }
 
     // Artista
     > span:nth-of-type(1) {
@@ -107,7 +114,7 @@ export const CardMusic = styled.div<{ $primary?: string; }>`
     div:last-child {
         display: flex;
         align-items: center;
-        gap: 19px;
+        gap: 9px;
 
         span {
             color: #6B7280;
@@ -125,8 +132,17 @@ export const CardMusic = styled.div<{ $primary?: string; }>`
     &:hover {
         background-color: #39393B;
     }
-
+   
+    div > button{
+       border: none;
+       background-color: transparent;
+       visibility: hidden;
+       cursor: pointer;
+    }
     
+    &:hover :where(div > button){
+        visibility: visible
+    }
 `
 
 export const ListEdit = styled.div`
