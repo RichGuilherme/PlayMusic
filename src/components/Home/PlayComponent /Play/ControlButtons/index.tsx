@@ -5,20 +5,25 @@ import { HiPauseCircle } from "react-icons/hi2";
 import { MdPlayCircleFilled } from "react-icons/md";
 import { LuRefreshCcw } from "react-icons/lu";
 import { SetStateAction } from 'react';
+import { useDispatch } from 'react-redux';
+import { playPause } from '../../../../../redux/features/playerSlice';
 
 type ControllersProps = {
     setLoop: React.Dispatch<SetStateAction<boolean>>
-    setPlaying: React.Dispatch<SetStateAction<boolean>>
     setShuffle: React.Dispatch<SetStateAction<boolean>>
     loop: boolean
     shuffle: boolean
-    playing: boolean
+    isPlaying: boolean
     handlePrevSong: () => void
     handleNextSong: () => void
 }
 
-export const Controllers = ({ setLoop, setPlaying, setShuffle, loop, playing, shuffle, handlePrevSong, handleNextSong }: ControllersProps) => {
+export const Controllers = ({ setLoop,  setShuffle, loop, isPlaying, shuffle, handlePrevSong, handleNextSong }: ControllersProps) => {
+    const dispatch = useDispatch()
 
+    const handlePlayPause = () => {
+        dispatch(playPause(!isPlaying))
+    }
 
     return (
         <ControlButtons>
@@ -32,8 +37,8 @@ export const Controllers = ({ setLoop, setPlaying, setShuffle, loop, playing, sh
                 <FiChevronLeft size={23} />
             </button>
 
-            <button onClick={() => setPlaying((playing: unknown) => !playing)}>
-                {playing ?
+            <button onClick={() => handlePlayPause()}>
+                {isPlaying ?
                     <HiPauseCircle
 
                         size={41} />

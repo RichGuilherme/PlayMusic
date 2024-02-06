@@ -11,13 +11,13 @@ type PlayProps = {
     muted: boolean
     music: string
     duration: number
+    isPlaying: boolean
     currentIndex: number
     currentSongs: { musics: songData[] }
 }
 
 
-export const Play = ({ volumeProps, muted, music, duration, currentSongs, currentIndex }: PlayProps) => {
-    const [playing, setPlaying] = useState(false)
+export const Play = ({ volumeProps, muted, music, duration, isPlaying, currentSongs, currentIndex }: PlayProps) => {
     const [loop, setLoop] = useState(false)
     const [shuffle, setShuffle] = useState(false)
     const [musica, setMusica] = useState(`${music}`)
@@ -42,24 +42,26 @@ export const Play = ({ volumeProps, muted, music, duration, currentSongs, curren
     }
 
     const handlePrevSong = () => {
+
         if (currentIndex === 0) {
             dispatch(prevSong(currentSongs?.musics.length - 1))
         } else {
             dispatch(prevSong(currentIndex - 1))
         }
     }
-    
+
     useEffect(() => {
         if (audioPlayRef.current) {
-            if (playing) {
+            if (isPlaying) {
                 dispatch(activePlay(true))
                 audioPlayRef.current.play()
             } else {
                 audioPlayRef.current.pause()
             }
         }
-    }, [playing, dispatch])
+    }, [isPlaying, dispatch])
 
+    // atualizar o som do audio 
     useEffect(() => {
         if (audioPlayRef.current) {
 
@@ -75,8 +77,7 @@ export const Play = ({ volumeProps, muted, music, duration, currentSongs, curren
     return (
         <ContainerPlay>
             <Controllers
-                setPlaying={setPlaying}
-                playing={playing}
+                isPlaying={isPlaying}
                 setLoop={setLoop}
                 loop={loop}
                 setShuffle={setShuffle}
@@ -91,7 +92,7 @@ export const Play = ({ volumeProps, muted, music, duration, currentSongs, curren
             <audio
                 src={musica}
                 ref={audioPlayRef}
-                autoPlay={playing}
+                autoPlay={isPlaying}
                 onEnded={handleNextSong}
                 loop={loop}
                 muted={muted}>
