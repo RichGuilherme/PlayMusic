@@ -1,5 +1,5 @@
-import { MdPlayCircleFilled } from "react-icons/md";
-import { BsThreeDots } from "react-icons/bs";
+import { MdPlayCircleFilled, MdDeleteForever } from "react-icons/md";
+
 import { HiPlus } from "react-icons/hi";
 import { CardMusic, ContainerPlayList, HeaderList, ListEdit, Musics, SSongList } from "./style";
 
@@ -13,18 +13,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { activePlay, playPause, setActiveSong, songData } from "../../../../../redux/features/playerSlice";
 import { RootState } from "../../../../../redux/store";
 import { HiPauseCircle } from "react-icons/hi2";
+import { PopMusicDelete } from "./PopDeleteMusic";
+import { BsThreeDots } from "react-icons/bs";
+import { Modal } from "../../../../modal";
+import { ApiResponse } from "../../../../../hooks/useAxios";
 
 
 export const SongList = () => {
-    const { currentIndex, isPlaying, activeSong } = useSelector((state: RootState) => state.player)
-    const [data, setData] = useState(null)
+    const { currentIndex, isPlaying, activeSong, currentSongs} = useSelector((state: RootState) => state.player)
+    const [data, setData] = useState<ApiResponse | null>(null)
+    const [isOpen, setIsOpen] = useState(false)
+    const [idMusicDelete, setIdMusicDelete] = useState("")
     const dispatch = useDispatch()
 
+    const handleCloseModal = () => {
+        setIsOpen(false)
+    }
 
-    const handleCardMusic = (index: number, song: songData) => {
+    const handleDeleteMusic = (idMusic: string) => {
+        setIdMusicDelete(idMusic)
+        setIsOpen(true)
+    }
+
+    const handleMusic = (index: number, song: songData) => {
         dispatch(setActiveSong({ song, data, i: index }))
         dispatch(activePlay(true))
     }
+
 
     const handlePlayPause = () => {
         dispatch(playPause(!isPlaying))
@@ -35,11 +50,12 @@ export const SongList = () => {
             try {
                 const res = await axiosInstancia.get("music/getMusics")
                 setData(res.data)
-
+                
                 // Atualizar o state do activeSong com a primeira música, para ativação imediata
-                if (activeSong.title == "") {
+                if (activeSong._id == "") {
                     dispatch(setActiveSong({ song: res.data.musics[0], data: res.data, i: 0 }))
                 }
+                
 
             } catch (error) {
                 console.error("Error fetching data:", error)
@@ -48,7 +64,7 @@ export const SongList = () => {
 
         fetchData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentIndex])
+    }, [currentSongs])
 
 
 
@@ -105,7 +121,7 @@ export const SongList = () => {
                             key={index}
                             $ColorIndex={`${currentIndex}`}
                             $ColorIndex2={`${currentIndex}`}
-                            onDoubleClick={() => handleCardMusic(index, data)}>
+                            onDoubleClick={() => handleMusic(index, data)}>
                             <div>
                                 <span id={`${index}`}>
                                     {index + 1}
@@ -127,15 +143,25 @@ export const SongList = () => {
                                     {SecondForMin(Math.floor(data.duration))}
                                 </span>
 
-                                <div>
-                                    <BsThreeDots size={20} />
-                                </div>
+                                <button
+                                    onClick={() => handleDeleteMusic(data._id)}>
+                                    <span></span>
+                                    <MdDeleteForever size={20} />
+                                </button>
                             </div>
 
                         </CardMusic>
                     ))}
 
+
+
                 </Musics>
+
+                <Modal isOpen={isOpen} handleClose={handleCloseModal}>
+                    <PopMusicDelete
+                        idMusicDelete={idMusicDelete}
+                        setIsOpen={setIsOpen} />
+                </Modal>
 
             </ContainerPlayList>
         </SSongList>
