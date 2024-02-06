@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 interface player {
-    currentSongs: songData[],
+    currentSongs: {
+        musics: songData[];
+    }
     currentIndex: number,
     isActive: boolean,
     isPlaying: boolean,
@@ -27,11 +29,21 @@ export type songData = {
 }
 
 const initialState: player = {
-    currentSongs: [],
+    currentSongs: {
+        musics: [],
+    },
     currentIndex: 0,
     isActive: false,
     isPlaying: false,
-    activeSong: {},
+    activeSong: {
+        _id: "",
+        user_id: "",
+        title: "",
+        artist: "",
+        duration: 0,
+        thumbnail: "",
+        storage_url: "",
+    },
 }
 
 const playerSlice = createSlice({
@@ -39,7 +51,11 @@ const playerSlice = createSlice({
     initialState,
     reducers: {
         setActiveSong: (state, action) => {
-            state.activeSong = action.payload.song;
+            const newActiveSong = action.payload.song;
+
+            if (state.activeSong._id !== newActiveSong._id) {
+                state.activeSong = newActiveSong;
+            }
 
             if (action.payload?.data) {
                 state.currentSongs = action.payload.data;
@@ -66,9 +82,11 @@ const playerSlice = createSlice({
         playPause: (state, action) => {
             state.isPlaying = action.payload
         },
+
         activePlay: (state, action) => {
             state.isActive = action.payload
-        }
+        },
+
     },
 })
 

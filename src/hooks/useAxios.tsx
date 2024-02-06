@@ -18,7 +18,7 @@ export type ApiResponse = {
   sumDurations: number
 }
 
-type MusicData = {
+export type MusicData = {
   _id: string
   user_id: string
   title: string
