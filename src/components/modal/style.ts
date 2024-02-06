@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ModalDiv = styled.section<{ $block?: string }>`
-    display: ${p => p.$block && p.$block};
+    display: block;
     position: fixed;
     top: 0;
     left:0;
@@ -17,15 +17,25 @@ export const ModalContainer = styled.div`
     left:50%;
     min-width: 25%;
     height:auto;
-    padding: 2rem;
     transform: translate(-50%, -50%);
+    border-radius: 10px;
     background: white;
 
-    button {
+    header {
+       border-radius: 10px 10px 0 0;
+       padding: 10px 10px 6px 10px;
+       background-color: #bfbfbf;
+    }
+
+    header > button {
         border:none;
         background-color: transparent;
 
         cursor: pointer;
+         
+        svg {
+            color: #575757;
+        }
 
         &:hover{
             color: ${props => props.theme.colors.colorPrimary};

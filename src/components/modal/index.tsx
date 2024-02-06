@@ -5,20 +5,26 @@ import { FaArrowLeft } from "react-icons/fa6";
 type ModalProps = {
     children: ReactNode
     handleClose: () => void
-    show: boolean
+    isOpen: boolean
 }
 
-export const Modal = ({ children, handleClose, show }: ModalProps) => {
+export const Modal = ({ children, handleClose, isOpen }: ModalProps) => {
 
     return (
-        <ModalDiv $block={show ? "block" : "none"}>
-            <ModalContainer>
-                <button
-                    onClick={handleClose}>
-                    <FaArrowLeft size={22} />
-                </button>
-                {children}
-            </ModalContainer>
-        </ModalDiv>
+        <>
+            {isOpen && (
+                <ModalDiv >
+                    <ModalContainer>
+                        <header>
+                            <button
+                                onClick={handleClose}>
+                                <FaArrowLeft size={22} />
+                            </button>
+                        </header>
+                        {children}
+                    </ModalContainer>
+                </ModalDiv>
+            )}
+        </>
     )
 }

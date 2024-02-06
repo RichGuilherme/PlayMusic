@@ -14,7 +14,7 @@ import { useState } from "react";
 
 
 export const SideBar = () => {
-    const [openModal, setOpenModal] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -22,8 +22,12 @@ export const SideBar = () => {
         Cookies.remove('token')
     }
 
-    const handleClose = () => {
-        setOpenModal(!openModal)
+    const handleOpenModal = () => {
+         setIsOpen(true)
+    } 
+
+    const handleCloseModal = () => {
+        setIsOpen(false)
     }
 
     return (
@@ -45,7 +49,7 @@ export const SideBar = () => {
                     </div>
 
                     <div>
-                        <div onClick={() => setOpenModal(!openModal)}>
+                        <div onClick={handleOpenModal}>
                             <HiPlus />
                             <p>Add Music</p>
                         </div>
@@ -75,7 +79,7 @@ export const SideBar = () => {
                     </div>
                 </ContainerMenus>
 
-                <Modal show={openModal} handleClose={handleClose}>
+                <Modal isOpen={isOpen} handleClose={handleCloseModal}>
                     <AddMusic />
                 </Modal>
 

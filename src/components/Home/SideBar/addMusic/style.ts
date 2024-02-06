@@ -5,6 +5,8 @@ export const ContainerUpload = styled.div`
   display:flex;
   flex-direction: column;
   align-items: center;
+
+  padding: 40px 32px 25px 32px;
 `
 
 export const FormFile = styled.form`
@@ -14,7 +16,6 @@ export const FormFile = styled.form`
   align-items: center;
   
   padding: 50px 30px;
-  margin-top: 23px;
   border: 4px dashed #ADFF00;
    
   cursor: pointer;
