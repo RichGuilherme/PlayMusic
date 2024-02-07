@@ -12,13 +12,13 @@ type popDeleteProps = {
 
 
 export const PopMusicDelete = ({idMusicDelete, setIsOpen}:popDeleteProps) => {
-    const { currentIndex, activeSong } = useSelector((state: RootState) => state.player)
+    const { currentIndex, currentSongs } = useSelector((state: RootState) => state.player)
     const dispatch = useDispatch()
 
     const handleConfirmDelete = () => {
         axiosInstancia.delete(`music/delete/?musicId=${idMusicDelete}`)
         .then(res => {
-            dispatch(setActiveSong({song: activeSong, data: res.data, i: currentIndex}))
+            dispatch(setActiveSong({song: currentSongs.musics[currentIndex -1], data: res.data, i: currentIndex - 1}))
         })
         .catch(error => {
             console.log(error)
