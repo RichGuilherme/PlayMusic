@@ -9,6 +9,7 @@ import { BsEye, BsEyeSlash } from "react-icons/bs";
 import axios from "axios";
 
 
+
 export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -20,17 +21,13 @@ export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
         e.preventDefault();
 
         try {
-            const response = await axiosInstancia.post('/user/login',
+            await axiosInstancia.post('/user/login',
                 JSON.stringify({ email, password }))
-
-            localStorage.setItem("email", response.data.email)
-            localStorage.setItem("userName", response.data.username)
-
 
             navigate("/home")
 
         } catch (error) {
-            if(axios.isAxiosError(error)){
+            if (axios.isAxiosError(error)) {
                 setError(error.response?.data.error)
                 console.log(error)
             }
@@ -86,10 +83,10 @@ export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
                 </button>
             </SForm>
 
-            <button >
+            <a href="http://localhost:4000/user/auth/google">
                 <FcGoogle size={28} />
                 Entra com o Google
-            </button>
+            </a>
 
             <p>
                 Não possui conta?
