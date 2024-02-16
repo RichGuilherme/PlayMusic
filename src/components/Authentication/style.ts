@@ -42,7 +42,7 @@ export const ContainerForm = styled.div`
        }
    }
 
-   button {
+   button, a {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -61,9 +61,10 @@ export const ContainerForm = styled.div`
         font-size: 14px;
         font-weight: 500;
         letter-spacing: 0.42px;
-
+        color: #000;
         cursor: pointer;
    }
+
 
    div > p {
        color: #595959;

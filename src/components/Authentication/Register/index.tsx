@@ -20,11 +20,9 @@ export const RegisterBack = ({ isRotateCard }: RotateDegPops) => {
         e.preventDefault();
 
         try {
-            const response = await axiosInstancia.post('/user/register',
+            await axiosInstancia.post('/user/register',
                 JSON.stringify({ email, password, username }))
 
-            localStorage.setItem("email", response.data.email)
-            localStorage.setItem("userName", response.data.username)
             navigate("/authentication")
 
         } catch (error) {

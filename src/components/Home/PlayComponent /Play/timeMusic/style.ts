@@ -11,6 +11,7 @@ export const Times = styled.div`
     color: #6B7280;
 
     span {
+        min-width: 34px;
         font-size: 16px;
         margin-inline: 10px;
     }
