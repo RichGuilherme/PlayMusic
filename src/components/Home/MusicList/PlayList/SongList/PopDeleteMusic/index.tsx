@@ -16,9 +16,16 @@ export const PopMusicDelete = ({idMusicDelete, setIsOpen}:popDeleteProps) => {
     const dispatch = useDispatch()
 
     const handleConfirmDelete = () => {
+        
         axiosInstancia.delete(`music/delete/?musicId=${idMusicDelete}`)
-        .then(res => {
-            dispatch(setActiveSong({song: currentSongs.musics[currentIndex -1], data: res.data, i: currentIndex - 1}))
+        .then(() => {
+            const indexToRemove = currentIndex
+            const currentSongsAtt = currentSongs.musics.filter((_, i) => i !== indexToRemove)
+
+            const indexAtt = currentIndex == 0 ? currentIndex : currentIndex - 1  
+            
+
+            dispatch(setActiveSong({song: currentSongs.musics[indexAtt], data: currentSongsAtt, i: indexAtt}))
         })
         .catch(error => {
             console.log(error)

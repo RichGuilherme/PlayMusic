@@ -24,7 +24,7 @@ export const AddMusic = () => {
     const [showProgress, setShowProgress] = useState(false)
     const dispatch = useDispatch()
     const fileInputRef = useRef<HTMLInputElement>(null)
-    const { currentIndex, activeSong } = useSelector((state: RootState) => state.player)
+    const { currentIndex, activeSong, currentSongs } = useSelector((state: RootState) => state.player)
 
     const handleClickFile = () => {
         if (fileInputRef.current) {
@@ -78,7 +78,10 @@ export const AddMusic = () => {
             }
         })
             .then((res) => {
-                dispatch(setActiveSong({ song: activeSong, data: res.data, i: currentIndex }))
+                const newMusicObject = res.data
+                const attCurrentSongs = [...currentSongs.musics, newMusicObject]
+
+                dispatch(setActiveSong({ song: activeSong, data: { ...currentSongs, musics: attCurrentSongs }, i: currentIndex }))
             })
             .catch((error) => {
                 console.log(error)

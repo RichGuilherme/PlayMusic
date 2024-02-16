@@ -20,10 +20,12 @@ import { ApiResponse } from "../../../../../hooks/useAxios";
 
 
 export const SongList = () => {
-    const { currentIndex, isPlaying, activeSong, currentSongs} = useSelector((state: RootState) => state.player)
+    const { currentIndex, isPlaying, activeSong, currentSongs } = useSelector((state: RootState) => state.player)
     const [data, setData] = useState<ApiResponse | null>(null)
     const [isOpen, setIsOpen] = useState(false)
     const [idMusicDelete, setIdMusicDelete] = useState("")
+
+
     const dispatch = useDispatch()
 
     const handleCloseModal = () => {
@@ -38,35 +40,38 @@ export const SongList = () => {
     const handleMusic = (index: number, song: songData) => {
         dispatch(setActiveSong({ song, data, i: index }))
         dispatch(activePlay(true))
+
     }
 
 
     const handlePlayPause = () => {
+
         dispatch(playPause(!isPlaying))
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axiosInstancia.get("music/getMusics")
-                setData(res.data)
-                
-                // Atualizar o state do activeSong com a primeira música, para ativação imediata
+
+    const fetchData = async () => {
+        try {
+            const res = await axiosInstancia.get("music/getMusics")
+            setData(res.data)
+
+            // Atualizar o state do activeSong com a primeira música, para ativação imediata
+            if (res.data.musics.length !== 0) {
                 if (activeSong._id == "") {
                     dispatch(setActiveSong({ song: res.data.musics[0], data: res.data, i: 0 }))
                 }
-                
-
-            } catch (error) {
-                console.error("Error fetching data:", error)
             }
-        };
+        } catch (error) {
+            console.error("Error fetching data:", error)
+        }
+    }
 
+
+    useEffect(() => {
         fetchData()
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentSongs])
-
-
 
     return (
         <SSongList>

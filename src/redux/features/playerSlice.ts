@@ -51,11 +51,7 @@ const playerSlice = createSlice({
     initialState,
     reducers: {
         setActiveSong: (state, action) => {
-            const newActiveSong = action.payload.song;
-
-            if (state.activeSong._id !== newActiveSong._id) {
-                state.activeSong = newActiveSong;
-            }
+            state.activeSong = action.payload.song
 
             if (action.payload?.data) {
                 state.currentSongs = action.payload.data;
