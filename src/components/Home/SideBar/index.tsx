@@ -1,4 +1,4 @@
-import imageProfile from "../../../assets/imageProfile.jpeg";
+import imageProfile from "../../../assets/default-profile.jpeg";
 import { ContainerMenus, Profile, SSideBar, SwitchButton } from "./style";
 import Cookies from 'js-cookie'
 
@@ -11,11 +11,18 @@ import { useNavigate } from "react-router-dom";
 import { Modal } from "../../modal";
 import { AddMusic } from "./addMusic";
 import { useState } from "react";
+import { useAxios } from "../../../hooks/useAxios";
+import axiosInstancia from "../../../api/axiosConfig";
 
 
 export const SideBar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
+    const { data: userData } = useAxios({
+        axiosInstance: axiosInstancia,
+        method: "GET",
+        url: "user/getDataUser"
+    })
 
     const handleLogout = () => {
         navigate("/authentication")
@@ -36,7 +43,7 @@ export const SideBar = () => {
                 <Profile>
                     <img src={imageProfile}
                         alt="profile" />
-                    <h1>{localStorage.getItem("userName")}</h1>
+                    <h1>{userData?.username}</h1>
                 </Profile>
 
                 <ContainerMenus>
