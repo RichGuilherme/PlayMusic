@@ -1,94 +1,143 @@
 import { useState } from "react";
 import { RotateDegPops } from "../../../@types/rotateProps";
-import { SForm } from "../style"
+import { CheckboxContainer, FormsInputs, MessageError, SForm } from "../style"
 import { Register } from "./style"
 import axiosInstancia from "../../../api/axiosConfig";
 import { useNavigate } from "react-router-dom";
 
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { FcGoogle, } from "react-icons/fc";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 
+
+const schemaRegister = z.object({
+    username: z.string().min(5, "Username dever ter no mínino 5 caracteres"),
+    email: z.string().email("Email invalido!"),
+    password: z.string().min(4, "Senha curta demais")
+})
+
+type PropsForm = z.infer<typeof schemaRegister>
 
 export const RegisterBack = ({ isRotateCard }: RotateDegPops) => {
     const [showPassword, setShowPassword] = useState(false)
-    const [username, setUsarname] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
-    const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const {
+        handleSubmit,
+        register,
+        setError,
+        formState: { errors, isSubmitting }
+    } = useForm<PropsForm>({
+        criteriaMode: "all",
+        mode: 'all',
+        resolver: zodResolver(schemaRegister),
+        defaultValues: {
+            username: '',
+            email: '',
+            password: '',
+        }
+    })
+
+    const handleRegisterSubmit = async (data: PropsForm) => {
+        const email = data.email
+        const password = data.password
+        const username = data.username
 
         try {
+            await new Promise((resolve) => setTimeout(resolve, 1000))
+
             await axiosInstancia.post('/user/register',
                 JSON.stringify({ email, password, username }))
 
-            navigate("/authentication")
-
+            navigate("/home")
         } catch (error) {
-            console.log('Usuário ou senha inválidos', error.response.data);
-
+            if (axios.isAxiosError(error)) {
+                setError("root", {
+                    message: error?.response?.data.error || "Erro desconhecido",
+                })
+            }
         }
-
     }
+
     return (
         <Register >
             <div>
-                <h1>Bem Vindo </h1>
+                <h1>Bem Vindo</h1>
                 <p>Acesse sua conta e se divirta com suas músicas</p>
             </div>
 
-            <SForm onSubmit={(e) => handleRegister(e)}>
-                <label htmlFor="text">Username</label>
-                <input
-                    type="text"
-                    placeholder="Escreva seu email"
-                    required
-                    onChange={(e) => setUsarname(e.target.value)} />
+            <SForm onSubmit={handleSubmit(handleRegisterSubmit)}>
+                <FormsInputs>
+                    <label htmlFor="text">Username</label>
+                    <input
+                        type="text"
+                        placeholder="Escreva seu email"
+                        required
+                        {...register("username")} />
+                    {errors.username?.message && (
+                        <MessageError>{errors.username?.message}</MessageError>
+                    )}
+                </FormsInputs>
 
-                <label htmlFor="email">Email</label>
-                <input
-                    type="email"
-                    placeholder="Escreva seu email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)} />
+                <FormsInputs>
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        placeholder="Escreva seu email"
+                        required
+                        {...register("email")} />
+                    {errors.email?.message && (
+                        <MessageError>{errors.email?.message}</MessageError>
+                    )}
+                </FormsInputs>
 
-                <label htmlFor="password">
-                    Senha
-                    {showPassword ?
-                        <div onClick={() => setShowPassword(!showPassword)}>
-                            <BsEye
-                                size={22} />
-                        </div>
-                        :
-                        <div onClick={() => setShowPassword(!showPassword)}>
-                            <BsEyeSlash
-                                size={22} />
-                        </div>
-                    }
-                </label>
+                <FormsInputs>
+                    <label htmlFor="password">
+                        Senha
+                        {showPassword ?
+                            <div onClick={() => setShowPassword(!showPassword)}>
+                                <BsEye
+                                    size={22} />
+                            </div>
+                            :
+                            <div onClick={() => setShowPassword(!showPassword)}>
+                                <BsEyeSlash
+                                    size={22} />
+                            </div>
+                        }
+                    </label>
+                    <input
+                        type={`${showPassword ? "text" : "password"}`}
+                        placeholder="********"
+                        required
+                        {...register("password")} />
+                    {errors.password?.message && (
+                        <MessageError>{errors.password?.message}</MessageError>
+                    )}
+                </FormsInputs>
 
-                <input
-                    type={`${showPassword ? "text" : "password"}`}
-                    placeholder="********"
-                    required
-                    onChange={(e) => setPassword(e.target.value)} />
-
-                <div>
+                <CheckboxContainer>
                     <input type="checkbox" />
                     <label htmlFor="checkbox">Lembra de mim</label>
-                </div>
+                </CheckboxContainer>
 
-                <button type="submit" >
-                    Register
+
+                <button type="submit" disabled={isSubmitting} >
+                    {isSubmitting ? "Loading..." : "Register"}
                 </button>
             </SForm>
 
-            <button>
+            <a href="http://localhost:4000/user/auth/google">
                 <FcGoogle size={28} />
                 Entra com o Google
-            </button>
+            </a>
+
+            {errors.root?.message && (
+                <MessageError>{errors.root?.message}</MessageError>
+            )}
 
             <p>
                 Possui conta?

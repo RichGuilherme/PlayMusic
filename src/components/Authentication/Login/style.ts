@@ -9,8 +9,8 @@ export const Login = styled.div`
 
    padding: 73px 61px;
 
-   width: 100%;
-   height: 100%;
+   width: 100%; 
+   background-color: #fff;
    
    backface-visibility: hidden;
 `

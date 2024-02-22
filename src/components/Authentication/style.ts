@@ -14,7 +14,7 @@ export const SAuthentication = styled.div`
     background-position: center;
 `
 export const ContainerForm = styled.div`
-   min-height: 591px;
+   height: auto;
    width: 450px;
    position: relative;
 
@@ -66,14 +66,14 @@ export const ContainerForm = styled.div`
    }
 
 
-   div > p {
+   > div > p {
        color: #595959;
        text-align: center;
        font-size: 13px;
        font-weight: 500;
        letter-spacing: 0.3px;
 
-       span {
+        > span {
            color: #ADFF00;
            font-weight: 500;
            letter-spacing: 0.3px;
@@ -91,7 +91,27 @@ export const SForm = styled.form`
 
     width: 100%;
 
-    > label {
+    input:focus {
+        outline: none;
+    }
+
+    button {
+        background: #ADFF00;
+        box-shadow: 0px 4px 10px 0px rgba(233, 68, 75, 0.25);
+
+        &:hover {
+           background: #ace92b;
+        }
+    }
+`
+export const FormsInputs = styled.div`
+    display:flex;
+    flex-direction: column;
+    gap: 7px;
+    
+    margin-bottom: 10px;
+
+    label {
         display:flex;
         align-items: center;
         justify-content: space-between;
@@ -111,22 +131,27 @@ export const SForm = styled.form`
        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
 
        padding: 11px 15px;
-       margin-bottom: 13px;
     }
+`
 
-    input[type="checkbox"]{
+export const CheckboxContainer = styled.div`
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   gap: 5px;
+
+   margin-bottom: 10px;
+
+   input[type="checkbox"]{
         border-radius: 4px;
         border: 1px solid rgba(0, 0, 0, 0.25);
         background: rgba(196, 196, 196, 0.00);
 
         margin-right: 6.2px;
     }
-    input:focus {
-        outline: none;
-    }
+`
 
-    button{
-        background: #ADFF00;
-        box-shadow: 0px 4px 10px 0px rgba(233, 68, 75, 0.25);
-    }
+export const MessageError = styled.span`
+    color: #ed4a4a; 
+    font-size: 12px;
 `
