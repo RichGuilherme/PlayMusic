@@ -1,4 +1,3 @@
-import imageProfile from "../../../assets/default-profile.jpeg";
 import { ContainerMenus, Profile, SSideBar, SwitchButton } from "./style";
 import Cookies from 'js-cookie'
 
@@ -10,7 +9,7 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../../modal";
 import { AddMusic } from "./addMusic";
-import { useState } from "react";
+import {  useState } from "react";
 import { useAxios } from "../../../hooks/useAxios";
 import axiosInstancia from "../../../api/axiosConfig";
 
@@ -30,18 +29,19 @@ export const SideBar = () => {
     }
 
     const handleOpenModal = () => {
-         setIsOpen(true)
-    } 
+        setIsOpen(true)
+    }
 
     const handleCloseModal = () => {
         setIsOpen(false)
     }
 
+
     return (
         <>
             <SSideBar>
                 <Profile>
-                    <img src={imageProfile}
+                    <img src={userData?.imagProfile || "src/assets/default-profile.jpeg"}
                         alt="profile" />
                     <h1>{userData?.username}</h1>
                 </Profile>
