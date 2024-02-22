@@ -2,8 +2,8 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { useEffect, useState } from 'react'
 
 type useAxiosProps = {
-  axiosInstance: AxiosInstance
-  method: string,
+  axiosInstance: AxiosInstance 
+  method: string
   url: string
   requestConfig?: AxiosRequestConfig
 }
@@ -11,11 +11,16 @@ type useAxiosProps = {
 export type ApiResponse = {
   musics: MusicData[]
 
-  //Descritions data
+  //Description data
   namePlayList: string
-  descritionPlaylist: string
+  descriptionPlaylist: string
   sumMusics: number
   sumDurations: number
+  
+  // user
+  username: string
+  email: string
+  imagProfile: string
 }
 
 export type MusicData = {
@@ -29,17 +34,18 @@ export type MusicData = {
   __v: number
 }
 
-
+type AxiosMethod = 'get' | 'post' | 'put' | 'delete';
 
 export const useAxios = ({ axiosInstance, method, url, requestConfig }: useAxiosProps) => {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<ApiResponse | null>(null)
   const [error, setError] = useState('')
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-       const response = await axiosInstance[method.toLowerCase()](url, {
+       const response = await axiosInstance[method.toLowerCase() as AxiosMethod](url, {
           ...requestConfig,
         })
 
