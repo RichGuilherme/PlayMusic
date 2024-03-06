@@ -1,12 +1,13 @@
 
 import React, { useRef, useState } from 'react'
 import { ContainerUpload, FormFile, LoadingArea, LoadingBar, UploadedArea } from './style'
-import axiosInstanciaMusic from '../../../../api/axiosMusic'
+import axiosInstanciaMusic from '../../../api/axiosMusic'
 import { LuCheck, LuUploadCloud } from "react-icons/lu";
 import { ImFileMusic } from "react-icons/im";
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveSong } from '../../../../redux/features/playerSlice';
-import { RootState } from '../../../../redux/store';
+import { setActiveSong } from '../../../redux/features/playerSlice';
+import { RootState } from '../../../redux/store';
+import { useParams } from 'react-router-dom';
 
 type MusicFile = {
     name: string;
@@ -25,6 +26,7 @@ export const AddMusic = () => {
     const dispatch = useDispatch()
     const fileInputRef = useRef<HTMLInputElement>(null)
     const { currentIndex, activeSong, currentSongs } = useSelector((state: RootState) => state.player)
+    const { IdPlaylist } = useParams()
 
     const handleClickFile = () => {
         if (fileInputRef.current) {
@@ -57,14 +59,15 @@ export const AddMusic = () => {
         setFileAudio(prevState => [...prevState, { name: fileName, loading: 0 }])
         setShowProgress(true)
 
-        axiosInstanciaMusic.post("music/create", formData, {
+        axiosInstanciaMusic.post(`music/create/${IdPlaylist}`, formData, {
             onUploadProgress: ({ loaded, total }) => {
                 if (total !== undefined) {
                     setFileAudio((prevState) => {
-                      const newFilesAudios = [...prevState]
-                      newFilesAudios[newFilesAudios.length - 1].loading = Math.floor((loaded / total) * 100)
-                      return newFilesAudios
-                })}
+                        const newFilesAudios = [...prevState]
+                        newFilesAudios[newFilesAudios.length - 1].loading = Math.floor((loaded / total) * 100)
+                        return newFilesAudios
+                    })
+                }
 
                 if (loaded === total) {
                     const fileSize = total < 1024
