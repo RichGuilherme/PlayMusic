@@ -103,8 +103,8 @@ export const ContainerMenus = styled.nav`
     svg {
        fill: ${props => props.theme.colors.colorPrimary};
  
-       height: 26px;
-       width: 26px;
+       height: 24px;
+       width: 24px;
     }
 `
 

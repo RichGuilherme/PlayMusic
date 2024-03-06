@@ -4,11 +4,11 @@ import Cookies from 'js-cookie'
 import { BsMoon, } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
-import { MdLogout } from "react-icons/md";
+import { MdLogout, MdPlaylistPlay } from "react-icons/md";
 import { AiOutlineSetting } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../../modal";
-import { AddMusic } from "./addMusic";
+import { AddMusic } from "../../modal/addMusic";
 import { useState } from "react";
 import useAxios from "../../../hooks/useAxios";
 import axiosInstancia from "../../../api/axiosConfig";
@@ -23,6 +23,10 @@ interface UserData {
 export const SideBar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
+
+    const { IdPlaylist } = useParams()
+
+
     const { data: userData } = useAxios<UserData>({
         axiosInstance: axiosInstancia,
         method: "GET",
@@ -46,11 +50,12 @@ export const SideBar = () => {
         navigate("/home/user")
     }
 
+
     return (
         <>
             <SSideBar>
                 <Profile>
-                    <img src={userData?.imagProfile || "src/assets/default-profile.jpeg"}
+                    <img src={userData?.imagProfile || "../src/assets/default-profile.jpeg"}
                         alt="profile" />
                     <h1>{userData?.username}</h1>
                 </Profile>
@@ -62,14 +67,17 @@ export const SideBar = () => {
                             <p>Favorite</p>
                         </div>
 
-                        <div>
-                            <FaHeart />
+                        <div onClick={() => navigate("/home/playlists")}>
+                            <MdPlaylistPlay />
                             <p>Playlist</p>
                         </div>
                     </div>
 
                     <div>
-                        <div onClick={handleOpenModal}>
+
+                        <div
+                            style={{ display: `${IdPlaylist ? "flex" : "none"}` }}
+                            onClick={handleOpenModal}>
                             <HiPlus />
                             <p>Add Music</p>
                         </div>
