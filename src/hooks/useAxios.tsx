@@ -1,51 +1,25 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios'
 import { useEffect, useState } from 'react'
 
-type useAxiosProps = {
+interface useAxiosProps {
   axiosInstance: AxiosInstance 
   method: string
   url: string
   requestConfig?: AxiosRequestConfig
 }
 
-export type ApiResponse = {
-  musics: MusicData[]
-
-  //Description data
-  namePlayList: string
-  descriptionPlaylist: string
-  sumMusics: number
-  sumDurations: number
-  
-  // user
-  username: string
-  email: string
-  imagProfile: string
-}
-
-export type MusicData = {
-  _id: string
-  user_id: string
-  title: string
-  artist: string
-  duration: number
-  thumbnail: string
-  storage_url: string
-  __v: number
-}
-
 type AxiosMethod = 'get' | 'post' | 'put' | 'delete';
 
-export const useAxios = ({ axiosInstance, method, url, requestConfig }: useAxiosProps) => {
+const useApiHook = <T,> ({ axiosInstance, method, url, requestConfig }: useAxiosProps) => {
   const [loading, setLoading] = useState(true)
-  const [data, setData] = useState<ApiResponse | null>(null)
+  const [data, setData] = useState<T | null>(null)
   const [error, setError] = useState('')
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-       const response = await axiosInstance[method.toLowerCase() as AxiosMethod](url, {
+       const response: AxiosResponse<T> = await axiosInstance[method.toLowerCase() as AxiosMethod](url, {
           ...requestConfig,
         })
 
@@ -64,3 +38,5 @@ export const useAxios = ({ axiosInstance, method, url, requestConfig }: useAxios
   }, [axiosInstance, method, requestConfig, url])
   return {data, loading, error}
 }
+
+export default useApiHook

@@ -9,15 +9,21 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../../modal";
 import { AddMusic } from "./addMusic";
-import {  useState } from "react";
-import { useAxios } from "../../../hooks/useAxios";
+import { useState } from "react";
+import useAxios from "../../../hooks/useAxios";
 import axiosInstancia from "../../../api/axiosConfig";
+
+interface UserData {
+    username: string
+    email: string
+    imagProfile: string
+}
 
 
 export const SideBar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
-    const { data: userData } = useAxios({
+    const { data: userData } = useAxios<UserData>({
         axiosInstance: axiosInstancia,
         method: "GET",
         url: "user/getDataUser"

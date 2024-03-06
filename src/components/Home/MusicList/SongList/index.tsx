@@ -16,12 +16,22 @@ import { HiPauseCircle } from "react-icons/hi2";
 import { PopMusicDelete } from "./PopDeleteMusic";
 import { BsThreeDots } from "react-icons/bs";
 import { Modal } from "../../../modal";
-import { ApiResponse } from "../../../../hooks/useAxios";
+
+interface MusicData {
+    _id: string
+    user_id: string
+    title: string
+    artist: string
+    duration: number
+    thumbnail: string
+    storage_url: string
+    __v: number
+}
 
 
 export const SongList = () => {
     const { currentIndex, isPlaying, activeSong, currentSongs } = useSelector((state: RootState) => state.player)
-    const [data, setData] = useState<ApiResponse | null>(null)
+    const [data, setData] = useState<{ musics: MusicData[] } | null>(null)
     const [isOpen, setIsOpen] = useState(false)
     const [idMusicDelete, setIdMusicDelete] = useState("")
 
@@ -69,7 +79,7 @@ export const SongList = () => {
 
     useEffect(() => {
         fetchData()
-        
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentSongs])
 
