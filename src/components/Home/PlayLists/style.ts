@@ -1,8 +1,15 @@
 import styled from "styled-components";
 
 export const SPlayLists = styled.section`
-   margin-top: 30px;
-   margin-inline: 53px;
+    width: 100%;
+    height: 100%;
+
+    background-color: #1F1F1F;
+    color: #ffff;
+
+    overflow: auto;
+   padding: 30px;
+   padding-inline: 53px;
 
    h1 {
     font-size: 40px;
@@ -23,11 +30,13 @@ export const PlayListsContainer = styled.div`
     gap: 24px;
 
     div {
-        display: flex;
-        flex-direction: column;
-        gap: 9px;
+        a {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
 
         cursor: pointer;
+        }
 
         img {
             width: 250px;
@@ -36,7 +45,7 @@ export const PlayListsContainer = styled.div`
             border-radius: 4px;
         }
  
-        span a {
+        span {
             color: #FAFAFA;
             font-weight: 700;
         }

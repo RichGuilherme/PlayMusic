@@ -1,8 +1,8 @@
-import axiosInstancia from "../../../../../api/axiosConfig";
+import axiosInstancia from "../../../../api/axiosConfig";
 import { Banner, ThumbnailPlayList, TitlePlayList } from "./style"
 import { CiMusicNote1 } from "react-icons/ci";
-import { useAxios } from "../../../../../hooks/useAxios";
-import { sumDuration } from "../../../../../utils/SecondForMin";
+import { useAxios } from "../../../../hooks/useAxios";
+import { sumDuration } from "../../../../utils/SecondForMin";
 
 export const BannerPlayList = () => {
 const {data:description} = useAxios({

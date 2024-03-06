@@ -3,20 +3,20 @@ import { MdPlayCircleFilled, MdDeleteForever } from "react-icons/md";
 import { HiPlus } from "react-icons/hi";
 import { CardMusic, ContainerPlayList, HeaderList, ListEdit, Musics, SSongList } from "./style";
 
-import axiosInstancia from "../../../../../api/axiosConfig";
+import axiosInstancia from "../../../../api/axiosConfig";
 
-import { SecondForMin } from "../../../../../utils/SecondForMin";
+import { SecondForMin } from "../../../../utils/SecondForMin";
 
 import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { activePlay, playPause, setActiveSong, songData } from "../../../../../redux/features/playerSlice";
-import { RootState } from "../../../../../redux/store";
+import { activePlay, playPause, setActiveSong, songData } from "../../../../redux/features/playerSlice";
+import { RootState } from "../../../../redux/store";
 import { HiPauseCircle } from "react-icons/hi2";
 import { PopMusicDelete } from "./PopDeleteMusic";
 import { BsThreeDots } from "react-icons/bs";
-import { Modal } from "../../../../modal";
-import { ApiResponse } from "../../../../../hooks/useAxios";
+import { Modal } from "../../../modal";
+import { ApiResponse } from "../../../../hooks/useAxios";
 
 
 export const SongList = () => {

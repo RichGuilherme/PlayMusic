@@ -36,6 +36,9 @@ export const SideBar = () => {
         setIsOpen(false)
     }
 
+    const handleUserSetting = () => {
+        navigate("/home/user")
+    }
 
     return (
         <>
@@ -48,10 +51,14 @@ export const SideBar = () => {
 
                 <ContainerMenus>
                     <div>
-
                         <div>
                             <FaHeart />
                             <p>Favorite</p>
+                        </div>
+
+                        <div>
+                            <FaHeart />
+                            <p>Playlist</p>
                         </div>
                     </div>
 
@@ -63,7 +70,7 @@ export const SideBar = () => {
                     </div>
 
                     <div>
-                        <div onClick={() => handleLogout()}>
+                        <div onClick={handleLogout}>
                             <MdLogout />
                             <p>Logout</p>
                         </div>
@@ -79,7 +86,7 @@ export const SideBar = () => {
                             </SwitchButton>
                         </div>
 
-                        <div>
+                        <div onClick={handleUserSetting}>
                             <AiOutlineSetting />
                             <p>Setting</p>
                         </div>

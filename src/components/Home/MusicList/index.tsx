@@ -1,14 +1,14 @@
-
-import { PlayList } from "./PlayList"
-// import { PlayLists } from "./PlayLists"
+import { BannerPlayList } from "./BannerPlayList"
+import { SongList } from "./SongList"
 import { MainViewContainer } from "./style"
 
 
-export const MusicList = () => {
-
-  return (
-    <MainViewContainer>
-       <PlayList />
-    </MainViewContainer>
-  )
+export const MusicList = () => {   
+ 
+    return (
+        <MainViewContainer>
+            <BannerPlayList />
+            <SongList />
+        </MainViewContainer>
+    )
 }

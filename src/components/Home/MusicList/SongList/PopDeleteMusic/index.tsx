@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import axiosInstancia from "../../../../../../api/axiosConfig";
+import axiosInstancia from "../../../../../api/axiosConfig";
 import { MunuPop } from "./style"
 import { IoMdCheckmark, IoMdClose } from "react-icons/io";
-import { setActiveSong } from "../../../../../../redux/features/playerSlice";
-import { RootState } from "../../../../../../redux/store";
+import { setActiveSong } from "../../../../../redux/features/playerSlice";
+import { RootState } from "../../../../../redux/store";
 
 type popDeleteProps = {
     idMusicDelete: string
