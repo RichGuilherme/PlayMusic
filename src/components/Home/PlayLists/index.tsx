@@ -29,7 +29,9 @@ export const PlayLists = () => {
                         <div key={index}>
                             <Link to={`/home/playlist/${playlist._id}`}>
                                 <img src={img} alt="Thumbnail playlist" />
-                                <span>{playlist.title}</span>
+                                <span>
+                                    {playlist.title.charAt(0).toUpperCase() + playlist.title.substring(1)}
+                                </span>
                             </Link>
                         </div>
                     ))}
