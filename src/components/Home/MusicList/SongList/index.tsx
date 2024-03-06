@@ -13,9 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { activePlay, playPause, setActiveSong, songData } from "../../../../redux/features/playerSlice";
 import { RootState } from "../../../../redux/store";
 import { HiPauseCircle } from "react-icons/hi2";
-import { PopMusicDelete } from "./PopDeleteMusic";
+import { PopMusicDelete } from "../../../modal/PopDeleteMusic";
 import { BsThreeDots } from "react-icons/bs";
 import { Modal } from "../../../modal";
+import { useParams } from "react-router-dom";
 
 interface MusicData {
     _id: string
@@ -34,6 +35,7 @@ export const SongList = () => {
     const [data, setData] = useState<{ musics: MusicData[] } | null>(null)
     const [isOpen, setIsOpen] = useState(false)
     const [idMusicDelete, setIdMusicDelete] = useState("")
+    const { IdPlaylist } = useParams()
 
 
     const dispatch = useDispatch()
@@ -60,9 +62,10 @@ export const SongList = () => {
     }
 
 
+
     const fetchData = async () => {
         try {
-            const res = await axiosInstancia.get("music/getMusics")
+            const res = await axiosInstancia.get(`music/getMusics/${IdPlaylist}`)
             setData(res.data)
 
             // Atualizar o state do activeSong com a primeira música, para ativação imediata
@@ -169,7 +172,6 @@ export const SongList = () => {
                     ))}
 
 
-
                 </Musics>
 
                 <Modal isOpen={isOpen} handleClose={handleCloseModal}>
@@ -177,6 +179,7 @@ export const SongList = () => {
                         idMusicDelete={idMusicDelete}
                         setIsOpen={setIsOpen} />
                 </Modal>
+
 
             </ContainerPlayList>
         </SSongList>
