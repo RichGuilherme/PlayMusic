@@ -49,7 +49,7 @@ export const MusicDetails = styled.div`
     }
 `
 export const VoidDetails = styled.div`
-   width: 300px;
+   width: 403px;
 `
 
 export const Volume = styled.div`
