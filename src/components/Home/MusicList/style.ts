@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MainViewContainer = styled.main`
+export const MainViewContainer = styled.section`
     width: 100%;
     height: 100%;
 
