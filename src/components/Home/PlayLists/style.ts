@@ -26,9 +26,10 @@ export const SPlayLists = styled.section`
 export const PlayListsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    flex-direction: row;
     gap: 24px;
-
+ 
+    margin-left: 18px;
     div {
         a {
             display: flex;
