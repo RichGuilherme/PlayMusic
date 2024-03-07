@@ -12,6 +12,8 @@ import { AddMusic } from "../../modal/addMusic";
 import { useState } from "react";
 import useAxios from "../../../hooks/useAxios";
 import axiosInstancia from "../../../api/axiosConfig";
+import { PopCreatePlaylist } from "../../modal/PopCreatePlaylist";
+
 
 interface UserData {
     username: string
@@ -21,7 +23,8 @@ interface UserData {
 
 
 export const SideBar = () => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isAddMusicModalOpen, setAddMusicModalOpen] = useState(false)
+    const [isCreatePlaylistModalOpen, setCreatePlaylistModalOpen] = useState(false)
     const navigate = useNavigate()
 
     const { IdPlaylist } = useParams()
@@ -38,15 +41,23 @@ export const SideBar = () => {
         Cookies.remove('token')
     }
 
-    const handleOpenModal = () => {
-        setIsOpen(true)
+    const openAddMusicModal = () => {
+        setAddMusicModalOpen(true)
     }
 
-    const handleCloseModal = () => {
-        setIsOpen(false)
+    const closeAddMusicModal = () => {
+        setAddMusicModalOpen(false)
     }
 
-    const handleUserSetting = () => {
+    const openCreatePlaylistModal = () => {
+        setCreatePlaylistModalOpen(true)
+    }
+
+    const closeCreatePlaylistModal = () => {
+        setCreatePlaylistModalOpen(false)
+    }
+
+    const goToUserSettings = () => {
         navigate("/home/user")
     }
 
@@ -74,13 +85,20 @@ export const SideBar = () => {
                     </div>
 
                     <div>
-
                         <div
                             style={{ display: `${IdPlaylist ? "flex" : "none"}` }}
-                            onClick={handleOpenModal}>
+                            onClick={openAddMusicModal}>
                             <HiPlus />
-                            <p>Add Music</p>
+                            <p>Add música</p>
                         </div>
+
+                        {!IdPlaylist &&
+                            <div
+                                onClick={openCreatePlaylistModal}>
+                                <HiPlus />
+                                <p>Criar playlist</p>
+                            </div>}
+
                     </div>
 
                     <div>
@@ -100,15 +118,19 @@ export const SideBar = () => {
                             </SwitchButton>
                         </div>
 
-                        <div onClick={handleUserSetting}>
+                        <div onClick={goToUserSettings}>
                             <AiOutlineSetting />
                             <p>Setting</p>
                         </div>
                     </div>
                 </ContainerMenus>
 
-                <Modal isOpen={isOpen} handleClose={handleCloseModal}>
+                <Modal isOpen={isAddMusicModalOpen} handleClose={closeAddMusicModal}>
                     <AddMusic />
+                </Modal>
+
+                <Modal isOpen={isCreatePlaylistModalOpen} handleClose={closeCreatePlaylistModal}>
+                    <PopCreatePlaylist setIsOpen={setCreatePlaylistModalOpen}/>
                 </Modal>
 
             </SSideBar>
