@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import axiosInstancia from "../../../api/axiosConfig";
-import { MunuPop } from "./style"
+import { MunuPopDelete } from "./style"
 import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 import { setActiveSong } from "../../../redux/features/playerSlice";
 import { RootState } from "../../../redux/store";
@@ -36,7 +36,7 @@ export const PopMusicDelete = ({idMusicDelete, setIsOpen}:popDeleteProps) => {
 
     return (
         <>
-            <MunuPop>
+            <MunuPopDelete>
                 <p>Tem certeza que quer deletar a música?</p>
                 
                 <div>
@@ -50,7 +50,7 @@ export const PopMusicDelete = ({idMusicDelete, setIsOpen}:popDeleteProps) => {
                         Fechar
                     </button>
                 </div>
-            </MunuPop>
+            </MunuPopDelete>
         </>
     )
 }

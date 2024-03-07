@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MunuPop = styled.div`
+export const MunuPopDelete = styled.div`
     width: 100%;
     height: auto;
     background-color: #fff;
