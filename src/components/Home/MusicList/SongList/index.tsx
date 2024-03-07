@@ -65,7 +65,7 @@ export const SongList = () => {
 
     const fetchData = async () => {
         try {
-            const res = await axiosInstancia.get(`music/getMusics/${IdPlaylist}`)
+            const res = await axiosInstancia.get(`music/musics/${IdPlaylist}`)
             setData(res.data)
 
             // Atualizar o state do activeSong com a primeira música, para ativação imediata
