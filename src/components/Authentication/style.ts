@@ -18,7 +18,7 @@ export const SAuthentication = styled.div`
 
 export const ContainerForm = styled.div<{$rotateDegProps: number}>`
    height: auto;
-   width: 450px;
+   width: 45.0rem;
    position: relative;
 
    background-color: #fff;
@@ -35,15 +35,15 @@ export const ContainerForm = styled.div<{$rotateDegProps: number}>`
         gap: 5px;
         
         width: 100%;
-        min-height: 41px;
+        min-height: 4.1rem;
         
-        margin-bottom: 11px;
+        margin-bottom: 1.1rem;
     
-        border-radius: 12px;
+        border-radius: 1.2rem;
         border: 1px solid rgba(0, 0, 0, 0.25);
         box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
 
-        font-size: 14px;
+        font-size: 1.4rem;
         font-weight: 500;
         letter-spacing: 0.42px;
         color: #000;
@@ -54,7 +54,7 @@ export const ContainerForm = styled.div<{$rotateDegProps: number}>`
    > div > p {
        color: #595959;
        text-align: center;
-       font-size: 13px;
+       font-size: 1.3rem;
        font-weight: 500;
        letter-spacing: 0.3px;
 
@@ -70,19 +70,19 @@ export const ContainerForm = styled.div<{$rotateDegProps: number}>`
 `
 export const HeaderContainer = styled.div`
     h1 {
-      font-size: 34px;
+      font-size: 3.4rem;
       font-weight: 500;
       letter-spacing: 1.02px;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 1.0rem;
      }
 
      p {
       color: #636364;
-      font-size: 14px;
+      font-size: 1.4rem;
       font-weight: 400;
       letter-spacing: 0.42px;
-      margin-bottom: 30px;
+      margin-bottom: 3.0rem;
      }
 
 `
@@ -104,16 +104,16 @@ export const FormsInputs = styled.div`
     flex-direction: column;
     gap: 7px;
     
-    margin-bottom: 10px;
+    margin-bottom: 1.0rem;
 
     label {
         display:flex;
         align-items: center;
         justify-content: space-between;
-        padding-right: 10px;
+        padding-right: 1.0rem;
 
         color: #181818;
-        font-size: 14px;
+        font-size: 1.4rem;
         font-weight: 500;
         letter-spacing: 0.42px;
 
@@ -125,7 +125,7 @@ export const FormsInputs = styled.div`
        background: rgba(196, 196, 196, 0.00);
        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
 
-       padding: 11px 15px;
+       padding: 1.1rem 1.5rem;
     }
 `
 
@@ -135,14 +135,16 @@ export const CheckboxContainer = styled.div`
    align-items: center;
    gap: 5px;
 
-   margin-bottom: 10px;
+   margin-bottom: 1.0rem;
 
+   font-size: 1.4rem;
+   
    input[type="checkbox"]{
         border-radius: 4px;
         border: 1px solid rgba(0, 0, 0, 0.25);
         background: rgba(196, 196, 196, 0.00);
 
-        margin-right: 6.2px;
+        margin-right: 3px;
     }
 `
 export const ButtonForm = styled.button`
@@ -156,5 +158,5 @@ export const ButtonForm = styled.button`
 
 export const MessageError = styled.span`
     color: #ed4a4a; 
-    font-size: 12px;
+    font-size: 1.2rem;
 `

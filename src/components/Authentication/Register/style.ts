@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Register = styled.div`
    width: 100%;
-   padding: 36px 61px;
+   padding: 3.6rem 6.1rem;
    background-color: #fff;
    
    backface-visibility: hidden;

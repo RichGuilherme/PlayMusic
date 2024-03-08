@@ -6,5 +6,5 @@ export const ContainerPlay = styled.div`
    flex-direction: column;
    justify-content: center;
    gap: 8px;
-   margin-right: 210px;
+   margin-right: 21.0rem;
 `

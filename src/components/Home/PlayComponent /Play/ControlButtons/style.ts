@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const ControlButtons = styled.div`
 display:flex;
 justify-content: center;
-gap: 13px;
+gap: 1.3rem;
 
 button {
   background-color: transparent;

@@ -44,3 +44,46 @@ export const ModalContainer = styled.div`
         }
     }
 `
+
+export const MunuPop = styled.div`
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    padding: 3.0rem 3.0rem 2.0rem 3.0rem;
+    color: #000;
+    
+    button {
+        min-width: 9.6rem;
+        border: none;
+        display: flex;
+        align-items: center;
+        
+        padding: 6px 1.5rem;
+        
+        cursor: pointer;
+    }
+    
+    p {
+        font-size: 1.6rem;
+    }
+
+    div {
+        display: flex;
+        justify-content: end;
+        gap: 1.2rem;
+
+        margin-top: 2.2rem;
+    }
+
+    button:first-child {
+       background-color: ${props => props.theme.colors.colorPrimary};
+
+       &:hover{
+        background-color: #ace92b;
+       }
+    }
+
+    button:nth-child(2):hover{
+        
+    }
+`

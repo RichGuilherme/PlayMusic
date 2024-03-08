@@ -14,8 +14,8 @@ export const BannerPlayList = styled.div`
     position: relative;
 
     height: 30vh;
-    max-height: 400px;
-    min-height: 340px;
+    max-height: 40.0rem;
+    min-height: 34.0rem;
     
     background-color: #252526;
     
@@ -34,23 +34,23 @@ export const BannerPlayList = styled.div`
         height: 100%;
         display: flex;
         align-items: end;
-        gap: 16px;
+        gap: 1.6rem;
 
-        padding-left: 33px;
-        padding-bottom: 40px;
+        padding-left: 3.3rem;
+        padding-bottom: 4.0rem;
     }
 `
 
 export const ThumbnailPlayList = styled.div`
-    height: 232px;
-    min-width: 232px;
+    height: 23.2rem;
+    min-width: 23.2rem;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     background-color: #282828;
-    box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.50);
+    box-shadow: 0px 4px 6.0rem 0px rgba(0, 0, 0, 0.50);
 
     button {
         border: none;
@@ -58,27 +58,27 @@ export const ThumbnailPlayList = styled.div`
 
         svg {
             color: #b3b3b3;
-            height: 80px;
-            width: 80px;
+            height: 8.0rem;
+            width: 8.0rem;
         }
     }
 `
 export const TitlePlayList = styled.div`
    display: flex;
    flex-direction: column;
-   gap: 14px;
+   gap: 1.4rem;
    
-   margin-right: 20px;
+   margin-right: 2.0rem;
 
    h1 { 
-     font-size: 84px;
+     font-size: 8.4rem;
      font-weight: 900;
    }
    
    span:nth-of-type(1) > p {
-    max-height: 74px;
+    max-height: 7.4rem;
 
-    font-size: 14px;  
+    font-size: 1.4rem;  
     font-weight: 400;
     color: rgba(250, 250, 250, 0.75);
     overflow: hidden;

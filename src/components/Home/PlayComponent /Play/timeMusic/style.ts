@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerTimeMusic = styled.div`
-    width: 818px;
+    width: 81.8rem;
 `
 export const Times = styled.div`
     display:flex;
@@ -11,8 +11,8 @@ export const Times = styled.div`
     color: #6B7280;
 
     span {
-        min-width: 34px;
-        font-size: 16px;
+        min-width: 3.4rem;
+        font-size: 1.6rem;
         margin-inline: 10px;
     }
 `
@@ -20,7 +20,7 @@ export const Times = styled.div`
 export const ProgressBar = styled.div`
    width: 100%;
    height: 5px;
-   border-radius: 50px;
+   border-radius: 5.0rem;
 
    background-color: #ffffff4d;
    
@@ -31,7 +31,7 @@ export const ProgressBar = styled.div`
       height: 100%;
       width: 100%;
       
-      border-radius: 100px;
+      border-radius: 10.0rem;
     
       background-color: #fff;
      
@@ -46,10 +46,10 @@ export const ProgressBar = styled.div`
        position: absolute;
        top: -5px;
        right: -8px;
-       width: 15px;
-       height: 15px;
+       width: 1.5rem;
+       height: 1.5rem;
 
-       border-radius: 100px;
+       border-radius: 10.0rem;
        background-color: ${props => props.theme.colors.colorPrimary};
     }
     

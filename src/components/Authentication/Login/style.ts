@@ -7,7 +7,7 @@ export const Login = styled.div`
    top: 0;
    left: 0;
 
-   padding: 73px 61px;
+   padding: 7.3rem 6.1rem;
 
    width: 100%; 
    background-color: #fff;

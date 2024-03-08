@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const SSongList = styled.section`
-    margin-inline: 38px;
+    margin-inline: 3.8rem;
 
 `
 
@@ -11,7 +11,7 @@ export const ContainerPlayList = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     
-    margin-bottom: 28px;
+    margin-bottom: 2.8rem;
 
     width: 100%;
 `
@@ -31,10 +31,10 @@ export const HeaderList = styled.div`
       flex-direction: row;
       justify-content: space-between;
 
-      padding: 0 40px 9px 30px;
+      padding: 0 4.0rem 9px 3.0rem;
 
       span {
-        font-size: 15px;
+        font-size: 1.5rem;
         font-weight: 600;
         letter-spacing: 0;
         line-height: 1.25;
@@ -43,7 +43,7 @@ export const HeaderList = styled.div`
 
    > div div {
       display: flex;
-      gap: 19px;
+      gap: 1.9rem;
    }
 `
 
@@ -62,24 +62,25 @@ export const CardMusic = styled.div<{ $ColorIndex?: string; $ColorIndex2?: strin
     justify-content: space-between;
 
     border-radius: 8px;
-    padding: 5px 30px;
+    padding: 5px 3.0rem;
     
+    font-size: 1.6rem;
     // Title
     div:first-child {
-        width: 190px;
+        width: 19.0rem;
         display: flex;
         align-items: center;
-        gap: 22px;
+        gap: 2.2rem;
 
         img {
-            max-width: 40px;
-            max-height: 40px;
+            max-width: 4.0rem;
+            max-height: 4.0rem;
             background-position: center;
             background-size: cover;
         }
     
         > div {
-            min-width: 380px;
+            min-width: 38.0rem;
 
             display: flex;
             align-items: center;
@@ -107,7 +108,7 @@ export const CardMusic = styled.div<{ $ColorIndex?: string; $ColorIndex2?: strin
 
     // Artista
     > span:nth-of-type(1) {
-        width: 180px;
+        width: 18.0rem;
     }
 
     // duração
@@ -148,12 +149,12 @@ export const CardMusic = styled.div<{ $ColorIndex?: string; $ColorIndex2?: strin
 export const ListEdit = styled.div`
    display: flex;
    justify-content: space-between;
-   height: 101px;
+   height: 10.1rem;
 
     > div {
         display: flex;
         align-items: center;
-        gap: 28px;
+        gap: 2.8rem;
  
         color: ${props => props.theme.colors.colorPrimary};
  

@@ -8,6 +8,11 @@ export const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         font-family: "Inter", sans-serif;
     }
+
+    html {
+        font-size: 62.5%;
+    }
+
     body{
         overflow: hidden;
     }
@@ -31,7 +36,8 @@ export const ColorThemer = {
         bgSideBar: "#252526",
         bgPlayComponent: "#1F1F1F",
         colorSideBar: "#6B7280",
-        colorPrimary: "#ADFF00"
+        colorPrimary: "#ADFF00",
+        colorPrimaryHover: "#ace92b"
     }
 }
 

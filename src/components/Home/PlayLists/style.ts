@@ -8,14 +8,14 @@ export const SPlayLists = styled.section`
     color: #ffff;
 
     overflow: auto;
-   padding: 30px;
-   padding-inline: 53px;
+   padding: 3.0rem;
+   padding-inline: 5.3rem;
 
    h1 {
-    font-size: 40px;
+    font-size: 4.0rem;
     font-weight: 700;
 
-    margin-bottom: 40px;
+    margin-bottom: 4.0rem;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, .1);
 
@@ -27,9 +27,9 @@ export const PlayListsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 24px;
+    gap: 2.4rem;
  
-    margin-left: 18px;
+    margin-left: 1.8rem;
     div {
         a {
             display: flex;
@@ -40,14 +40,15 @@ export const PlayListsContainer = styled.div`
         }
 
         img {
-            width: 250px;
-            height: 248px;
+            width: 25.0rem;
+            height: 24.8rem;
       
             border-radius: 4px;
         }
  
         span {
             color: #FAFAFA;
+            font-size: 1.5rem;
             font-weight: 700;
         }
 
