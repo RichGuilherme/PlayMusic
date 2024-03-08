@@ -1,8 +1,9 @@
 
 import { useNavigate } from "react-router-dom"
 import axiosInstancia from "../../../api/axiosConfig"
-import { MunuPopCreatePlaylist } from "./style"
+
 import { IoMdCheckmark, IoMdClose } from "react-icons/io"
+import { MunuPop } from "../style"
 
 type CreatePlaylistProps = {
   setIsOpen: (any: boolean) => void
@@ -24,7 +25,7 @@ export const PopCreatePlaylist = ({ setIsOpen }: CreatePlaylistProps) => {
   }
 
   return (
-    <MunuPopCreatePlaylist>
+    <MunuPop>
       <p>Criar nova playlist?</p>
 
       <div>
@@ -38,6 +39,6 @@ export const PopCreatePlaylist = ({ setIsOpen }: CreatePlaylistProps) => {
           Fechar
         </button>
       </div>
-    </MunuPopCreatePlaylist>
+    </MunuPop>
   )
 }
