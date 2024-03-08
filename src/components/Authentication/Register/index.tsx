@@ -67,7 +67,7 @@ export const RegisterBack = ({ isRotateCard }: RotateDegPops) => {
         <S.Register >
             <HeaderContainer>
                 <h1>Bem Vindo</h1>
-                <p>Crie sua conta é venha salvar suas melhores música e playlist!</p>
+                <p>Crie uma conta agora é venha se divirta com suas músicas!</p>
             </HeaderContainer>
 
             <SForm onSubmit={handleSubmit(handleRegisterSubmit)}>
