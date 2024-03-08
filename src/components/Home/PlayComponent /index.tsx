@@ -1,5 +1,5 @@
 import { LuHeart } from "react-icons/lu";
-import { ContainerControlles, MusicDetails, VoidDetails, Volume } from "./style"
+import * as S from "./style"
 import { Play } from "./Play";
 import { useEffect, useState } from "react";
 import { SlVolume1, SlVolume2, SlVolumeOff} from "react-icons/sl";
@@ -39,9 +39,9 @@ export const PlayComponent = () => {
   }
 
   return (
-    <ContainerControlles>
+    <S.ContainerControlles>
       {activeSong !== null && isActive ?
-        <MusicDetails>
+        <S.MusicDetails>
           <img src={imageUrl} alt="image" />
 
           <div>
@@ -50,9 +50,9 @@ export const PlayComponent = () => {
           </div>
 
           <LuHeart size={21} />
-        </MusicDetails>
+        </S.MusicDetails>
         :
-        <VoidDetails></VoidDetails>
+        <S.VoidDetails></S.VoidDetails>
       }
 
       <Play
@@ -64,7 +64,7 @@ export const PlayComponent = () => {
         music={activeSong?.storage_url}
         duration={activeSong?.duration} />
 
-      <Volume>
+      <S.Volume>
         <div onClick={() => handleMute()}>
           {mute ?
             <SlVolumeOff size={25} /> :
@@ -82,7 +82,7 @@ export const PlayComponent = () => {
           value={volume}
           onChange={(e) => setVolume(Number(e.target.value))}
         />
-      </Volume>
-    </ContainerControlles>
+      </S.Volume>
+    </S.ContainerControlles>
   )
 }

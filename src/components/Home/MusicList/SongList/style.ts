@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const SSongList = styled.section`
+export const SectionListSong = styled.section`
     margin-inline: 3.8rem;
 
 `

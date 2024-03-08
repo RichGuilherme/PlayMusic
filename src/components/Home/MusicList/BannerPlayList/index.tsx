@@ -1,5 +1,5 @@
 import axiosInstancia from "../../../../api/axiosConfig";
-import { Banner, ThumbnailPlayList, TitlePlayList } from "./style"
+import * as S from "./style"
 import { CiMusicNote1 } from "react-icons/ci";
 import useAxios from "../../../../hooks/useAxios";
 import { sumDuration } from "../../../../utils/SecondForMin";
@@ -33,17 +33,17 @@ export const BannerPlayList = () => {
 
 
     return (
-        <Banner>
+        <S.Banner>
             <div></div>
 
-            <div>
-                <ThumbnailPlayList>
+            <S.BannerContainer>
+                <S.ThumbnailPlayList>
                     <button>
                         <CiMusicNote1 />
                     </button>
-                </ThumbnailPlayList>
+                </S.ThumbnailPlayList>
 
-                <TitlePlayList>
+                <S.TitlePlayList>
                     <h1>{description?.title}</h1>
 
                     <span>
@@ -53,8 +53,8 @@ export const BannerPlayList = () => {
                     <span>
                         <p>{`• ${playlistDuration?.sumMusics} músicas, ${sumDuration(playlistDuration?.sumDurations)}`}</p>
                     </span>
-                </TitlePlayList>
-            </div>
-        </Banner>
+                </S.TitlePlayList>
+            </S.BannerContainer>
+        </S.Banner>
     )
 }

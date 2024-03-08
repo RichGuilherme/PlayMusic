@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useRef, useState } from "react"
-import { ContainerTimeMusic, ProgressBar, Times } from "./style";
+import * as S from "./style";
 import { SecondForMin } from "../../../../../utils/SecondForMin";
 
 type TimeMusicProps = {
@@ -51,20 +51,20 @@ export const TimeMusic = ({ audioPlayRef, durationAudio }: TimeMusicProps) => {
 
 
     return (
-        <ContainerTimeMusic>
-            <Times>
+        <S.ContainerTimeMusic>
+            <S.Times>
                 <span >{startTime ? startTime : "0:00"}</span>
 
-                <ProgressBar
+                <S.ProgressBar
                     ref={progressBarRef}
                     onClick={handleProgressBarClick}>
 
                     <div style={{ width: `${progress + "%"}` }} ></div>
-                </ProgressBar>
+                </S.ProgressBar>
 
                 <span >{SecondForMin(Math.floor(durationAudio || 0))}</span>
-            </Times>
-        </ContainerTimeMusic>
+            </S.Times>
+        </S.ContainerTimeMusic>
 
     )
 }

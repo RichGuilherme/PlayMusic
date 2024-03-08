@@ -1,7 +1,7 @@
 import { MdPlayCircleFilled, MdDeleteForever } from "react-icons/md";
 
 import { HiPlus } from "react-icons/hi";
-import { CardMusic, ContainerPlayList, HeaderList, ListEdit, Musics, SSongList } from "./style";
+import * as S from "./style";
 
 import axiosInstancia from "../../../../api/axiosConfig";
 
@@ -87,8 +87,8 @@ export const SongList = () => {
     }, [currentSongs])
 
     return (
-        <SSongList>
-            <ListEdit>
+        <S.SectionListSong>
+            <S.ListEdit>
                 <div>
                     <div onClick={() => handlePlayPause()}>
                         {isPlaying ?
@@ -108,10 +108,10 @@ export const SongList = () => {
                 <div>
                     <HiPlus size={37} />
                 </div>
-            </ListEdit>
+            </S.ListEdit>
 
-            <ContainerPlayList>
-                <HeaderList>
+            <S.ContainerPlayList>
+                <S.HeaderList>
                     <div>
                         <div>
                             <div>
@@ -131,11 +131,11 @@ export const SongList = () => {
                             <span>Duration</span>
                         </div>
                     </div>
-                </HeaderList>
+                </S.HeaderList>
 
-                <Musics>
+                <S.Musics>
                     {data?.musics?.map((data, index: number) => (
-                        <CardMusic
+                        <S.CardMusic
                             key={index}
                             $ColorIndex={`${currentIndex}`}
                             $ColorIndex2={`${currentIndex}`}
@@ -168,11 +168,11 @@ export const SongList = () => {
                                 </button>
                             </div>
 
-                        </CardMusic>
+                        </S.CardMusic>
                     ))}
 
 
-                </Musics>
+                </S.Musics>
 
                 <Modal isOpen={isOpen} handleClose={handleCloseModal}>
                     <PopMusicDelete
@@ -181,7 +181,7 @@ export const SongList = () => {
                 </Modal>
 
 
-            </ContainerPlayList>
-        </SSongList>
+            </S.ContainerPlayList>
+        </S.SectionListSong>
     )
 }

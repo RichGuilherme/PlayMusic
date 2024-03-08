@@ -1,4 +1,4 @@
-import { ContainerMenus, Profile, SSideBar, SwitchButton } from "./style";
+import * as S from "./style";
 import Cookies from 'js-cookie'
 
 import { BsMoon, } from "react-icons/bs";
@@ -13,7 +13,6 @@ import { useState } from "react";
 import useAxios from "../../../hooks/useAxios";
 import axiosInstancia from "../../../api/axiosConfig";
 import { PopCreatePlaylist } from "../../modal/PopCreatePlaylist";
-
 
 interface UserData {
     username: string
@@ -64,15 +63,15 @@ export const SideBar = () => {
 
     return (
         <>
-            <SSideBar>
-                <Profile>
+            <S.SideBar>
+                <S.Profile>
                     <img src={userData?.imagProfile || "../src/assets/default-profile.jpeg"}
                         alt="profile" />
                     <h1>{userData?.username}</h1>
-                </Profile>
+                </S.Profile>
 
-                <ContainerMenus>
-                    <div>
+                <S.ContainerMenus>
+                    <S.SelectItems>
                         <div>
                             <FaHeart />
                             <p>Favorite</p>
@@ -82,9 +81,9 @@ export const SideBar = () => {
                             <MdPlaylistPlay />
                             <p>Playlist</p>
                         </div>
-                    </div>
+                    </S.SelectItems>
 
-                    <div>
+                    <S.SelectItems>
                         <div
                             style={{ display: `${IdPlaylist ? "flex" : "none"}` }}
                             onClick={openAddMusicModal}>
@@ -99,9 +98,9 @@ export const SideBar = () => {
                                 <p>Criar playlist</p>
                             </div>}
 
-                    </div>
+                    </S.SelectItems>
 
-                    <div>
+                    <S.SelectItems>
                         <div onClick={handleLogout}>
                             <MdLogout />
                             <p>Logout</p>
@@ -111,19 +110,18 @@ export const SideBar = () => {
                             <BsMoon />
                             <p>Dark Mode</p>
 
-
-                            <SwitchButton>
+                            <S.SwitchButton>
                                 <input type="checkbox" />
                                 <span className="slider"></span>
-                            </SwitchButton>
+                            </S.SwitchButton>
                         </div>
 
                         <div onClick={goToUserSettings}>
                             <AiOutlineSetting />
                             <p>Setting</p>
                         </div>
-                    </div>
-                </ContainerMenus>
+                    </S.SelectItems>
+                </S.ContainerMenus>
 
                 <Modal isOpen={isAddMusicModalOpen} handleClose={closeAddMusicModal}>
                     <AddMusic />
@@ -133,7 +131,7 @@ export const SideBar = () => {
                     <PopCreatePlaylist setIsOpen={setCreatePlaylistModalOpen}/>
                 </Modal>
 
-            </SSideBar>
+            </S.SideBar>
 
         </>
 

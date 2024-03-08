@@ -1,6 +1,6 @@
 
 import React, { useRef, useState } from 'react'
-import { ContainerUpload, FormFile, LoadingArea, LoadingBar, UploadedArea } from './style'
+import * as S from './style'
 import axiosInstanciaMusic from '../../../api/axiosMusic'
 import { LuCheck, LuUploadCloud } from "react-icons/lu";
 import { ImFileMusic } from "react-icons/im";
@@ -93,8 +93,8 @@ export const AddMusic = () => {
     }
 
     return (
-        <ContainerUpload>
-            <FormFile onClick={handleClickFile}>
+        <S.ContainerUpload>
+            <S.FormFile onClick={handleClickFile}>
                 <input
                     type="file"
                     name="music"
@@ -107,10 +107,10 @@ export const AddMusic = () => {
                 </div>
                 <h2>Importe seu arquivo aqui</h2>
                 <p>Arraste ou clique para fazer upload</p>
-            </FormFile>
+            </S.FormFile>
 
             {showProgress && (
-                <LoadingArea>
+                <S.LoadingArea>
                     {fileAudio.map((fileAudio, index) => (
 
                         <li key={index + 1}>
@@ -120,20 +120,20 @@ export const AddMusic = () => {
                                 <span>{`${fileAudio.name} - uploading`}  </span>
                                 <span>{`${fileAudio.loading}%`}</span>
 
-                                <LoadingBar>
+                                <S.LoadingBar>
                                     <div style={{ width: `${fileAudio.loading}%` }}>
                                     </div>
-                                </LoadingBar>
+                                </S.LoadingBar>
                             </div>
 
                         </li>
                     ))}
-                </LoadingArea>
+                </S.LoadingArea>
             )}
 
 
             {uploadedFiles.map((files, index) => (
-                <UploadedArea key={index + 1}>
+                <S.UploadedArea key={index + 1}>
                     <li>
                         <div>
                             <i ><ImFileMusic size={34} style={{ color: "#79b300" }} /></i>
@@ -144,9 +144,9 @@ export const AddMusic = () => {
                         </div>
                         <LuCheck size={23} style={{ color: "#79b300" }} />
                     </li>
-                </UploadedArea>
+                </S.UploadedArea>
             ))}
 
-        </ContainerUpload>
+        </S.ContainerUpload>
     )
 }

@@ -1,4 +1,4 @@
-import { PlayListsContainer, SPlayLists } from "./style"
+import * as S from "./style"
 
 import img from "../../../assets/Leo Season.jpg"
 import axiosInstancia from "../../../api/axiosConfig"
@@ -19,10 +19,10 @@ export const PlayLists = () => {
     })
 
     return (
-        <SPlayLists>
+        <S.SectionPlaylist>
             <h1>Listas adionadas</h1>
 
-            <PlayListsContainer>
+            <S.PlayListsContainer>
 
                 {playlists != null &&
                     playlists.map((playlist: Playlist, index: number) => (
@@ -37,7 +37,7 @@ export const PlayLists = () => {
                     ))}
 
 
-            </PlayListsContainer>
-        </SPlayLists>
+            </S.PlayListsContainer>
+        </S.SectionPlaylist>
     )
 }

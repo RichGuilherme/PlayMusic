@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { ModalContainer, ModalDiv } from "./style"
+import * as S from "./style"
 import { FaArrowLeft } from "react-icons/fa6";
 
 type ModalProps = {
@@ -13,8 +13,8 @@ export const Modal = ({ children, handleClose, isOpen }: ModalProps) => {
     return (
         <>
             {isOpen && (
-                <ModalDiv >
-                    <ModalContainer>
+                <S.ModalDiv >
+                    <S.ModalContainer>
                         <header>
                             <button
                                 onClick={handleClose}>
@@ -22,8 +22,8 @@ export const Modal = ({ children, handleClose, isOpen }: ModalProps) => {
                             </button>
                         </header>
                         {children}
-                    </ModalContainer>
-                </ModalDiv>
+                    </S.ModalContainer>
+                </S.ModalDiv>
             )}
         </>
     )
