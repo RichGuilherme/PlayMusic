@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { RotateDegPops } from "../../../@types/rotateProps";
-import { CheckboxContainer, FormsInputs, MessageError, SForm } from "../style"
-import { Register } from "./style"
+import { RotateDegPops } from "..";
+import { ButtonForm, CheckboxContainer, FormsInputs, HeaderContainer, MessageError, SForm } from "../style"
+import * as S from "./style"
 import axiosInstancia from "../../../api/axiosConfig";
 import { useNavigate } from "react-router-dom";
 
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { FcGoogle, } from "react-icons/fc";
+
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -63,11 +64,11 @@ export const RegisterBack = ({ isRotateCard }: RotateDegPops) => {
     }
 
     return (
-        <Register >
-            <div>
+        <S.Register >
+            <HeaderContainer>
                 <h1>Bem Vindo</h1>
-                <p>Acesse sua conta e se divirta com suas músicas</p>
-            </div>
+                <p>Crie sua conta é venha salvar suas melhores música e playlist!</p>
+            </HeaderContainer>
 
             <SForm onSubmit={handleSubmit(handleRegisterSubmit)}>
                 <FormsInputs>
@@ -125,9 +126,9 @@ export const RegisterBack = ({ isRotateCard }: RotateDegPops) => {
                 </CheckboxContainer>
 
 
-                <button type="submit" disabled={isSubmitting} >
+                <ButtonForm type="submit" disabled={isSubmitting} >
                     {isSubmitting ? "Loading..." : "Register"}
-                </button>
+                </ButtonForm>
             </SForm>
 
             <a href="http://localhost:4000/user/auth/google">
@@ -143,6 +144,6 @@ export const RegisterBack = ({ isRotateCard }: RotateDegPops) => {
                 Possui conta?
                 <span onClick={() => isRotateCard(0)}>Entrar</span>
             </p>
-        </Register>
+        </S.Register>
     )
 }

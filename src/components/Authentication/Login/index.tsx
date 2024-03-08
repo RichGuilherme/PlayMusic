@@ -1,15 +1,19 @@
 import { useState } from "react";
-import { RotateDegPops } from "../../../@types/rotateProps";
-import { CheckboxContainer, FormsInputs, MessageError, SForm } from "../style"
-import { Login } from "./style"
+import { RotateDegPops } from "..";
+
+import { ButtonForm, CheckboxContainer, FormsInputs, HeaderContainer, MessageError, SForm } from "../style"
+import * as S from "./style"
+
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
-import axiosInstancia from "../../../api/axiosConfig";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+
+import axiosInstancia from "../../../api/axiosConfig";
 import axios from "axios";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 
 const schemaLogin = z.object({
     email: z.string().min(1, "Preencha o campo").email(),
@@ -59,11 +63,11 @@ export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
 
 
     return (
-        <Login>
-            <div>
+        <S.Login>
+            <HeaderContainer>
                 <h1>Bem Vindo </h1>
                 <p>Acesse sua conta e se divirta com suas músicas</p>
-            </div>
+            </HeaderContainer>
 
             <SForm onSubmit={handleSubmit(handleLoginSubmit)}>
                 <FormsInputs>
@@ -106,9 +110,9 @@ export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
                     <label htmlFor="checkbox">Lembra de mim</label>
                 </CheckboxContainer>
 
-                <button type="submit" disabled={isSubmitting}>
+                <ButtonForm type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Loading..." : "Login"}
-                </button>
+                </ButtonForm>
             </SForm>
 
             <a href="http://localhost:4000/user/auth/google">
@@ -124,7 +128,7 @@ export const LoginFront = ({ isRotateCard }: RotateDegPops) => {
                 Não possui conta?
                 <span onClick={() => isRotateCard(180)}>Criar conta</span>
             </p>
-        </Login>
+        </S.Login>
 
     )
 }

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import backgroundMusic from "../../assets/background_music.jpg"
 
+
+
 export const SAuthentication = styled.div`
     height: 100vh;
     width: 100%;
@@ -13,35 +15,19 @@ export const SAuthentication = styled.div`
     background-size: cover;
     background-position: center;
 `
-export const ContainerForm = styled.div`
+
+export const ContainerForm = styled.div<{$rotateDegProps: number}>`
    height: auto;
    width: 450px;
    position: relative;
 
    background-color: #fff;
 
+   transform: rotateY(${(props) => props.$rotateDegProps}deg);
+
    transform-style: preserve-3d;
    transition: all 0.5s ease;
    
-   div {
-      h1 {
-        font-size: 34px;
-        font-weight: 500;
-        letter-spacing: 1.02px;
-        text-transform: uppercase;
-
-        margin-bottom: 10px;
-       }
-
-       p {
-        color: #636364;
-        font-size: 14px;
-        font-weight: 400;
-        letter-spacing: 0.42px;
-        margin-bottom: 30px;
-       }
-   }
-
    button, a {
         display: flex;
         align-items: center;
@@ -55,7 +41,6 @@ export const ContainerForm = styled.div`
     
         border-radius: 12px;
         border: 1px solid rgba(0, 0, 0, 0.25);
-        background: rgba(234, 69, 76, 0.00);
         box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
 
         font-size: 14px;
@@ -83,6 +68,24 @@ export const ContainerForm = styled.div`
        }
    }
 `
+export const HeaderContainer = styled.div`
+    h1 {
+      font-size: 34px;
+      font-weight: 500;
+      letter-spacing: 1.02px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+     }
+
+     p {
+      color: #636364;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.42px;
+      margin-bottom: 30px;
+     }
+
+`
 
 export const SForm = styled.form`
     display: flex;
@@ -95,14 +98,6 @@ export const SForm = styled.form`
         outline: none;
     }
 
-    button {
-        background: #ADFF00;
-        box-shadow: 0px 4px 10px 0px rgba(233, 68, 75, 0.25);
-
-        &:hover {
-           background: #ace92b;
-        }
-    }
 `
 export const FormsInputs = styled.div`
     display:flex;
@@ -148,6 +143,14 @@ export const CheckboxContainer = styled.div`
         background: rgba(196, 196, 196, 0.00);
 
         margin-right: 6.2px;
+    }
+`
+export const ButtonForm = styled.button`
+    background: #ADFF00;
+    box-shadow: 0px 4px 10px 0px rgba(233, 68, 75, 0.25);
+
+    &:hover {
+        background: #ace92b;
     }
 `
 
