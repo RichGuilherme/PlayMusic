@@ -1,9 +1,10 @@
 import axiosInstancia from "../../../../api/axiosConfig";
 import * as S from "./style"
 import { CiMusicNote1 } from "react-icons/ci";
-import useAxios from "../../../../hooks/useAxios";
+
 import { sumDuration } from "../../../../utils/SecondForMin";
 import { useParams } from "react-router-dom";
+import { useApiHook } from "../../../../hooks/useAxios";
 
 interface Description {
     title: string
@@ -19,16 +20,16 @@ interface DurationMusics {
 export const BannerPlayList = () => {
     const { IdPlaylist } = useParams()
 
-    const { data: description } = useAxios<Description>({
+    const { data: description } = useApiHook <Description>({
         axiosInstance: axiosInstancia,
         method: "GET",
-        url: `http://localhost:4000/playlist/list/${IdPlaylist}`
+        url: `playlist/list/${IdPlaylist}`
     })
 
-    const { data: playlistDuration } = useAxios<DurationMusics>({
+    const { data: playlistDuration } = useApiHook <DurationMusics>({
         axiosInstance: axiosInstancia,
         method: "GET",
-        url: `http://localhost:4000/playlist/duration/${IdPlaylist}`
+        url: `playlist/duration/${IdPlaylist}`
     })
 
 
