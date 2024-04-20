@@ -3,8 +3,7 @@ import * as S from "./style"
 import img from "../../../assets/Leo Season.jpg"
 import axiosInstancia from "../../../api/axiosConfig"
 import { Link } from "react-router-dom"
-import { useApiHook } from "../../../hooks/useAxios";
-
+import useApiHook from "../../../hooks/useAxios";
 
 interface Playlist {
     _id: string;
@@ -18,7 +17,6 @@ export const PlayLists = () => {
         method: "GET",
         url: "playList/lists"
     })
-
 
     return (
         <S.SectionPlaylist>

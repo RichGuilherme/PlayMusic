@@ -1,5 +1,5 @@
 import * as S from "./style";
-import Cookies from '../../../../node_modules/@types/js-cookie'
+import Cookies from 'js-cookie'
 
 import { BsMoon, } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
@@ -10,10 +10,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../../modal";
 import { AddMusic } from "../../modal/addMusic";
 import { useState } from "react";
-
+import useAxios from "../../../hooks/useAxios";
 import axiosInstancia from "../../../api/axiosConfig";
 import { PopCreatePlaylist } from "../../modal/PopCreatePlaylist";
-import { useApiHook } from "../../../hooks/useAxios";
 
 interface UserData {
     username: string
@@ -30,7 +29,7 @@ export const SideBar = () => {
     const { IdPlaylist } = useParams()
 
 
-    const { data: userData } = useApiHook <UserData>({
+    const { data: userData } = useAxios<UserData>({
         axiosInstance: axiosInstancia,
         method: "GET",
         url: "user/getDataUser"

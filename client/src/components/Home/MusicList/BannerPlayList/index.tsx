@@ -4,7 +4,8 @@ import { CiMusicNote1 } from "react-icons/ci";
 
 import { sumDuration } from "../../../../utils/SecondForMin";
 import { useParams } from "react-router-dom";
-import { useApiHook } from "../../../../hooks/useAxios";
+import useApiHook from "../../../../hooks/useAxios";
+
 
 interface Description {
     title: string
